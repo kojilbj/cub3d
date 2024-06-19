@@ -19,11 +19,41 @@ typedef struct	s_node
 
 typedef struct	s_player
 {
-	int	pos_x;
-	int	pos_y;
-	int	dir_x;
-	int	dir_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	cam_palne_x;
+	double	cam_palne_y;
 }	t_player;
+
+typedef struct s_ray
+{
+	double cam_x;
+	double dir_x;
+	double dir_y;
+	int map_x;
+	int map_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dist_x;
+	double delta_dist_y;
+	int axis;
+	double wall_x;
+	int	line_height;
+	int start_y;
+	int end_y;
+} t_ray;
+
+typedef struct s_texinfo
+{
+	int x;
+	int y;
+	double step;
+	double pos;
+	int index;
+
+} t_texinfo
 
 typedef struct	s_info
 {
@@ -35,6 +65,7 @@ typedef struct	s_info
 	char	*tex_ea;
 	char	*floor_rgb;
 	char	*ceiling_rgb;
+	int		**tex_list;//TODO: make & init this texture list
 }	t_info;
 
 
