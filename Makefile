@@ -1,6 +1,6 @@
 CC = cc
 //CFLAGS = -Wextra -Wall -Werror
-SRCS = main.c init.c
+SRCS = main.c init.c player_control.c validate.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = cub3d

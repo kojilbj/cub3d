@@ -53,13 +53,29 @@ void	texture_init(t_info *info, char **filedata)
 	{
 		splited = ft_split(filedata[i], ' ');
 		if (perfectly_match(splited[0], "NO"))
+		{
+			if (info->tex_no != NULL)
+				exit(EXIT_FAILURE);
 			info->tex_no = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "SO"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_so != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_so = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "WE"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_we != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_we = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "EA"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_ea != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_ea = ft_strdup(splited[1]);
+		}
 		free(splited[0]);
 		free(splited[1]);
 		i++;
@@ -76,9 +92,17 @@ void	color_init(t_info *info, char **filedata)
 	{
 		splited = ft_split(filedata[i], ' ');
 		if (perfectly_match(splited[0], "F"))
+		{
+			if (info->floor_rgb != NULL)
+				exit(EXIT_FAILURE);
 			info->floor_rgb = ft_strdup(splited[1]);
+		}
 		if (perfectly_match(splited[0], "C"))
+		{
+			if (info->ceiling_rgb != NULL)
+				exit(EXIT_FAILURE);
 			info->ceiling_rgb = ft_strdup(splited[1]);
+		}
 		free(splited[0]);
 		free(splited[1]);
 		i++;

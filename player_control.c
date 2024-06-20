@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:05:19 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/06/20 15:07:35 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:57:20 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,20 @@ void	move_player(t_vars *vars, int keycode)
 {
 	int	pos_x;
 	int	pos_y;
-	t_player	player;
+	int	last_pos_x;
+	int	last_pos_y;
 
-	player = vars->info.player;
-	pos_x = new_pos_x(player, keycode);
-	pos_y = new_pos_y(player, keycode);
-	printf("old pos_x, pos_y %d, %d\n", player.pos_x, player.pos_y);
-	printf("new pos_x, pos_y %d, %d\n", pos_x, pos_y);
+	last_pos_x = vars->info.player.pos_x;
+	last_pos_y = vars->info.player.pos_y;
+	printf("last %d, %d\n", last_pos_x, last_pos_y);
+	pos_x = new_pos_x(vars->info.player, keycode);
+	pos_y = new_pos_y(vars->info.player, keycode);
 	if (move_player_check(vars->info.map, pos_x, pos_y) == true)
 	{
+		printf("new %d, %d\n", pos_x, pos_y);
+		vars->info.map[last_pos_y][last_pos_x].type = '0';
 		vars->info.player.pos_x = pos_x;
 		vars->info.player.pos_y = pos_y;
-	}
+		vars->info.map[pos_y][pos_x].type = 'P';
+	}last_pos_y
 }

@@ -61,5 +61,12 @@ typedef struct	s_vars
 void	info_init(t_info *info, char *path);
 void	rotate_player(t_player *player, int keycode);
 void	move_player(t_vars *vars, int keycode);
+int	new_dir_x(t_player player, double rad);
+int	new_dir_y(t_player player, double rad);
+int	new_pos_x(t_player player, int keycode);
+int	new_pos_y(t_player player, int keycode);
+
+void	err_terminate(char *errmsg);
+int	validate(t_info info);
 
 #endif
