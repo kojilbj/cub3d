@@ -5,9 +5,40 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
-#define TEX_SIZE 64
+//--------------------
+//				WINDOW
+//--------------------
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 980
+
+//--------------------
+//			RAYCASTING
+//--------------------
+
+# define X_AXIS 0
+# define Y_AXIS 1
+
+//---------------------
+//				TEXTURE
+//---------------------
+#define TEX_SIZE 64
+# define SOUTH_WALL 0
+# define NORTH_WALL 1
+# define EAST_WALL 2 
+# define WEST_WALL 3
+
+enum e_tex_list_index
+{
+    NORTH = 0,
+    SOUTH = 1,
+    EAST = 2,
+    WEST = 3
+};
+
+
+//-------------------------------//
+			/*STRUCTURES*/			
+//------------------------------//
 
 typedef struct	s_node
 {
@@ -16,6 +47,15 @@ typedef struct	s_node
 	char	type;
 	int	distance;
 }	t_node;
+
+typedef struct s_img
+{
+	void	*img;
+	int		*addr;
+	int		bites_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img;
 
 typedef struct	s_player
 {

@@ -145,14 +145,14 @@ int	decide_dir_tex(t_ray *ray, t_player *player)
 	if (ray->aixs == Y_AXIS)
 	{
 		if (ray->map_y < player->pos_y)
-			wall_tex = NORTH_WALL;
+			wall_tex = WEST_WALL;
 		else
-		wall_tex = SOUTH_WALL;
+		wall_tex = EAST_WALL;
 	}
 	else if (ray->map_x < player->pos_x)
-		wall_tex = WEST_WALL;
+		wall_tex = NORTH_WALL;
 	else
-		wall_tex = EAST_WALL;
+		wall_tex = SOUTH_WALL;
 	return (wall_tex);
 }
 
@@ -185,6 +185,7 @@ void	update_tex_info(t_ray *ray, t_info *info, int x)
 		info->texture->y = (int)info->texture->pos	& (TEX_SIZE - 1);
 		info->texture->pos += info->texture->step;
 		color = info->tex_list[info->texture->index][TEX_SIZE * info->texture->y + info->texture->x];
+		//TODO: we have to get color
 		if (ray->axis == Y_AXIS)
 			color = (color >> 1) & 8355711;
 		info->tex_pixels[y][x] = color;

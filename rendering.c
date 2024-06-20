@@ -16,13 +16,13 @@ void	init_tex_pixels(t_info *info)
 {
 	int i;
 
-	info->tex_pixels = ft_calloc(WIN_HEIGHT + 1, sizeof(info->tex_pixels));
+	info->tex_pixels = ft_calloc(WIN_HEIGHT + 1, sizeof(*(info->tex_pixels)));
 	//write manege error
 
 	i = 0;
 	while (i < WIN_HEIGHT)
 	{
-		info->tex_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(info->tex_pixels));
+		info->tex_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(*(info->tex_pixels)));
 		i++;
 	}
 
@@ -42,7 +42,9 @@ void	render_frame(t_info *info)
 
 void	rendering(t_info *info)
 {
-	init_tex_pixels(info);//set info->tex_pixels
+	init_tex_pixels(info);
 	raycasting(info);
 	render_frame(info);
 }
+
+
