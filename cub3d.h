@@ -107,11 +107,22 @@ typedef struct	s_info
 	char	*floor_rgb;
 	char	*ceiling_rgb;
 
-	int		**tex_list;//TODO: make & init this texture list
-	int		**tex_pixels;//
+	int		**tex_list;
+	int		**tex_pixels;
 }	t_info;
 
 void	info_init(t_info *info, char *path);
 void	ray_direct(t_info info);
+
+//-----------------------
+//    dda_algorithm.c -> raycasitng.c
+//-----------------------
+void dda_algorithm(t_ray *ray, t_info *info);
+
+//------------------------
+//    make_tex_info.c  -> raycasitng.c
+//------------------------
+void	set_tex_info(t_ray *ray, t_texinfo *texture);
+void	update_tex_info(t_ray *ray, t_info *info, int x);
 
 #endif
