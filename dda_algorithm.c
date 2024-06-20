@@ -34,12 +34,13 @@ static int get_dir_y_step(t_ray *ray, t_player *player)
 	return (1);
 }
 
-static bool is_hitting_wall(t_ray *ray, t_node **map)
+static bool is_hitting_wall(t_node **map, t_ray *ray)
 {
-	if ('0' < map[ray->map_x][ray->map_y] && map[ray->map_x][ray->map_y] <= '9')
+	if ('0' < map[ray->map_x][ray->map_y].type)
 		return (true);
 	return (false);
 }
+//  && map[ray->map_x][ray->map_y].type <= '9'
 /*
 dda algorithm
 side_dist/x/y -> incleasing disitance from player's position to intger oordinate
@@ -52,8 +53,8 @@ void dda_algorithm(t_ray *ray, t_info *info)
 	int step_x;
 	int step_y;
 
-	step_x = get_dir_x_step(ray, info->player);
-	step_y = get_dir_y_step(ray, info->player);
+	step_x = get_dir_x_step(ray, &(info->player));
+	step_y = get_dir_y_step(ray, &(info->player));
 	hit_wall = 0;
 	while (hit_wall == 0)
 	{
@@ -69,6 +70,6 @@ void dda_algorithm(t_ray *ray, t_info *info)
 			ray->map_y += step_y;
 			ray->axis = Y_AXIS;
 		}
-		hi_wall = is_hitting_wall(info->map, ray);
+		hit_wall = is_hitting_wall(info->map, ray);
 	}
 }

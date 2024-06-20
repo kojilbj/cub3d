@@ -51,4 +51,5 @@ int	validate(t_info info)
 		err_terminate("Ceiling_RGB");
 	if (map_validate(info.map) == false)
 		err_terminate("Player");
+	return (0);
 }

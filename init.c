@@ -249,7 +249,6 @@ void	player_init(t_info *info)
 
 void	info_init(t_info *info, char *path)
 {
-	int	fd;
 	char	*filedata;
 	char	**splited;
 

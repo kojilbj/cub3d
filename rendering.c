@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	init_tex_pixels(t_info *info)
+static void	init_tex_pixels(t_info *info)
 {
 	int i;
 
@@ -27,22 +27,32 @@ void	init_tex_pixels(t_info *info)
 	}
 }
 
-void	render_frame(t_info *info)
+static void	render_frame(t_vars *vars)
 {
-	/*
-	１. 指定された幅と高さの画像を作成
-	２．ウィンドウ全体のピクセルを走査
-	３．各ピクセルの色を”レイキャスティング”の結果の基づいて設定
-	４．作成された画像をウィンドに描画
-	５．使用した画像リソースの解放
-	*/
+	int		x;
+	int		y;
+	t_img	img;
+
+	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
+	img.addr = (int *)mlx_get_data_addr(img.img, &img.bites_per_pixel, &img.size_line, &img.endian);
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+    	while (x < WIN_WIDTH)
+    	{
+        	img.addr[y * WIN_WIDTH + x] = vars->info.tex_pixels[y][x];
+			x++;
+    	}
+		y++;
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
+	mlx_destroy_image(vars->mlx, img.img);
 }
 
-void	rendering(t_info *info)
+void	rendering(t_vars *vars)
 {
-	init_tex_pixels(info);
-	raycasting(info);
-	render_frame(info);
+	init_tex_pixels(&(vars->info));
+	raycasting(&(vars->info));
+	render_frame(vars);
 }
-
-

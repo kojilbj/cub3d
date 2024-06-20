@@ -18,7 +18,6 @@ int	ft_abs(int value)
 		return -value;
 	return value;
 }
-
 /*
 initialize rays(struct ray)
 - x_cam -> where is camera(-1 <= x <= 1)
@@ -26,14 +25,13 @@ initialize rays(struct ray)
 - x/y_map -> current position of ray on map
 - delta_dist_x/y -> inclease of ditance acheving grid line 
 */
-void	init_ray_info(int x, t_ray *ray, t_player *player)
+void	init_ray_info(int x, t_ray *ray, t_player player)
 {
-	initialize_data(ray);
-	ray->cam_x = 2*x / (double)WINT_WIDTH - 1;
-	ray->dir_x = player->dir_x + (player->cam_palne_x * ray->cam_x);
-	ray->dir_y = player->dir_y + (player->cam_palne_y * ray->cam_x);
-	ray->map_x = player->pos_x;
-	ray->map_y = player->pos_y;
+	ray->cam_x = 2*x / (double)WIN_WIDTH - 1;
+	ray->dir_x = player.dir_x + (player.cam_palne_x * ray->cam_x);
+	ray->dir_y = player.dir_y + (player.cam_palne_y * ray->cam_x);
+	ray->map_x = player.pos_x;
+	ray->map_y = player.pos_y;
 	if(ray->dir_x == 0)
 		ray->delta_dist_x = -1;
 	else
@@ -43,7 +41,6 @@ void	init_ray_info(int x, t_ray *ray, t_player *player)
 	else
 		ray->delta_dist_y = ft_abs(1 / ray->dir_y);
 }
-
 /*
 wall_dist = inclease/decrease of ray
 wall_x -> distance of player's postion from hitting point of ray 
@@ -51,19 +48,19 @@ line_hight -> texture7s hight
 strat_y -> start point y of drawing texture
 end_y -> end point y of drawing texture
 */
-void	get_wall_dist(t_ray *ray, t_player *player)
+static void	get_wall_dist(t_ray *ray, t_player player)
 {
 	int wall_dist;
 
 	if (ray->axis == X_AXIS)
 	{
 		wall_dist = ray->side_dist_x - ray->delta_dist_x;
-		ray->wall_x = player->pos_y + wall_dist * ray->dir_y;
+		ray->wall_x = player.pos_y + wall_dist * ray->dir_y;
 	}
 	else
 	{
 		wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-		ray->wall_x = player->pos_x + wall_dist * ray->dir_x; 
+		ray->wall_x = player.pos_x + wall_dist * ray->dir_x; 
 	}
 	ray->wall_x -= floor(ray->wall_x);
 	ray->line_height = WIN_HEIGHT / wall_dist;
@@ -75,55 +72,38 @@ void	get_wall_dist(t_ray *ray, t_player *player)
 		ray->end_y = WIN_WIDTH - 1;
 }
 
-int	decide_dir_tex(t_ray *ray, t_player *player)
-{
-	int	wall_tex;
-	if (ray->aixs == Y_AXIS)
-	{
-		if (ray->map_y < player->pos_y)
-			wall_tex = WEST_WALL;
-		else
-		wall_tex = EAST_WALL;
-	}
-	else if (ray->map_x < player->pos_x)
-		wall_tex = NORTH_WALL;
-	else
-		wall_tex = SOUTH_WALL;
-	return (wall_tex);
-}
-
-void	initialize_ray(t_ray *ray)
-{
-	ray->cam_x = 0;
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->map_x = 0;
-	ray->map_y = 0;
-	ray->side_dist_x = 0;
-	ray->side_dist_y = 0;
-	ray->delta_dist_x = 0;
-	ray->delta_dist_y = 0;
-	ray->axis = 0;
-	ray->wall_x = 0;
-	ray->line_height = 0;
-	ray->start_y = 0;
-	ray->end_y = 0;
-}
-
 void	raycasting(t_info *info)
 {
 	int	x;
 	t_ray ray;
 
-	initialize_ray(&ray);//ft_bzero(ray, sizeof(ray));
+	ft_bzero(&ray, sizeof(ray));// initialize_ray(&ray);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		init_ray_info(x, &ray, info);
+		init_ray_info(x, &ray, info->player);
 		dda_algorithm(&ray, info);
-		get_wall_dist(ray, info->player);
-		set_tex_info(ray, info->texture);
-		update_tex_info(ray, info, x);
+		get_wall_dist(&ray, info->player);
+		set_tex_info(&ray, info->texture, info->player);
+		update_tex_info(&ray, info, x);
 		x++;
 	}
 }
+
+// void	initialize_ray(t_ray *ray)
+// {
+// 	ray->cam_x = 0;
+// 	ray->dir_x = 0;
+// 	ray->dir_y = 0;
+// 	ray->map_x = 0;
+// 	ray->map_y = 0;
+// 	ray->side_dist_x = 0;
+// 	ray->side_dist_y = 0;
+// 	ray->delta_dist_x = 0;
+// 	ray->delta_dist_y = 0;
+// 	ray->axis = 0;
+// 	ray->wall_x = 0;
+// 	ray->line_height = 0;
+// 	ray->start_y = 0;
+// 	ray->end_y = 0;
+// }

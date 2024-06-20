@@ -1,9 +1,12 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <libft.h>
+#include "libft/libft.h"
+#include "minilibx/mlx.h"
 #include <fcntl.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <math.h>
 
 //--------------------
 //				WINDOW
@@ -53,10 +56,10 @@ enum e_tex_list_index
 
 typedef struct	s_node
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	char	type;
-	int	distance;
+	int		distance;
 }	t_node;
 
 typedef struct s_img
@@ -80,31 +83,48 @@ typedef struct	s_player
 
 typedef struct s_ray
 {
-	double cam_x;
-	double dir_x;
-	double dir_y;
-	int map_x;
-	int map_y;
-	double side_dist_x;
-	double side_dist_y;
-	double delta_dist_x;
-	double delta_dist_y;
-	int axis;
-	double wall_x;
-	int	line_height;
-	int start_y;
-	int end_y;
+	double	cam_x;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		axis;
+	double	wall_x;
+	int		line_height;
+	int		start_y;
+	int		end_y;
 } t_ray;
 
 typedef struct s_texinfo
 {
-	int x;
-	int y;
-	double step;
-	double pos;
-	int index;
+	int		x;
+	int		y;
+	double	step;
+	double	pos;
+	int		index;
 	
 } t_texinfo;
+
+typedef struct	s_info
+{
+	t_node		**map;
+	t_player	player;
+	t_texinfo	*texture;
+
+	char		*tex_no;
+	char		*tex_so;
+	char		*tex_we;
+	char		*tex_ea;
+	char		*floor_rgb;
+	char		*ceiling_rgb;
+
+	int			**tex_list;
+	int			**tex_pixels;
+}	t_info;
 
 typedef struct	s_vars
 {
@@ -113,43 +133,42 @@ typedef struct	s_vars
 	t_info	info;
 }	t_vars;
 
-typedef struct	s_info
-{
-	t_node	**map;
-	t_player	player;
-	t_texinfo *texture;
-	char	*tex_no;
-	char	*tex_so;
-	char	*tex_we;
-	char	*tex_ea;
-	char	*floor_rgb;
-	char	*ceiling_rgb;
-
-	int		**tex_list;
-	int		**tex_pixels;
-}	t_info;
+//-------------------------------//
+			/*FUNCTIONS*/			
+//------------------------------//
 
 void	info_init(t_info *info, char *path);
 void	info_init(t_info *info, char *path);
 void	rotate_player(t_player *player, int keycode);
 void	move_player(t_vars *vars, int keycode);
-int	new_dir_x(t_player player, double rad);
-int	new_dir_y(t_player player, double rad);
-int	new_pos_x(t_player player, int keycode);
-int	new_pos_y(t_player player, int keycode);
+int		new_dir_x(t_player player, double rad);
+int		new_dir_y(t_player player, double rad);
+int		new_pos_x(t_player player, int keycode);
+int		new_pos_y(t_player player, int keycode);
 
 void	err_terminate(char *errmsg);
-int	validate(t_info info);
+int		validate(t_info info);
+
+
+// void	initialize_tex_list(t_info *info);
+void	initialize_tex_list(t_vars *vars);
+
+void	rendering(t_vars *vars);
 
 //-----------------------
-//    dda_algorithm.c -> raycasitng.c
+//			 raycasting.c
 //-----------------------
-void dda_algorithm(t_ray *ray, t_info *info);
+void	raycasting(t_info *info);
+
+//-----------------------
+//    	  dda_algorithm.c -> raycasitng.c
+//-----------------------
+void	dda_algorithm(t_ray *ray, t_info *info);
 
 //------------------------
-//    make_tex_info.c  -> raycasitng.c
+//		   make_tex_info.c  -> raycasitng.c
 //------------------------
-void	set_tex_info(t_ray *ray, t_texinfo *texture);
+void	set_tex_info(t_ray *ray, t_texinfo *texture, t_player player);
 void	update_tex_info(t_ray *ray, t_info *info, int x);
 
 #endif

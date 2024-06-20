@@ -32,7 +32,6 @@ void	display_map(t_node **map)
 	}
 }
 
-
 int	key_hook_handler(int keycode, t_vars *vars)
 {
 	printf("%d\n", keycode);
@@ -44,7 +43,7 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	terminate_handler(t_vars *vars)
+int	terminate_handler()
 {
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -54,11 +53,17 @@ int	main(int ac, char *av[])
 {
 	t_vars	vars;
 
+	if (ac == 0)
+		return 1;
 	info_init(&(vars.info), av[1]);
 	validate(vars.info);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+
+	initialize_tex_list(&vars);
+	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
 	mlx_hook(vars.win, 17, 1 << 17, terminate_handler, &vars);
+	// mlx_loop_hook()
 	mlx_loop(vars.mlx);
 }
