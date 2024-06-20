@@ -8,8 +8,19 @@
 //--------------------
 //				WINDOW
 //--------------------
-#define WIN_WIDTH 1920
-#define WIN_HEIGHT 980
+#define WIN_WIDTH 720
+#define WIN_HEIGHT 360
+
+#define RAD_PI 180 * M_PI / 180
+#define MINUS_RAD_PI -180 * M_PI / 180
+
+#define ESC 65307
+#define ROTATE_RIGHT 65363
+#define ROTATE_LEFT 65361
+#define FORWARD 119
+#define BACK 115
+#define RIGHT 100
+#define LEFT 97
 
 //--------------------
 //			RAYCASTING
@@ -95,6 +106,13 @@ typedef struct s_texinfo
 	
 } t_texinfo;
 
+typedef struct	s_vars
+{
+	void	*mlx;
+	void	*win;
+	t_info	info;
+}	t_vars;
+
 typedef struct	s_info
 {
 	t_node	**map;
@@ -112,7 +130,16 @@ typedef struct	s_info
 }	t_info;
 
 void	info_init(t_info *info, char *path);
-void	ray_direct(t_info info);
+void	info_init(t_info *info, char *path);
+void	rotate_player(t_player *player, int keycode);
+void	move_player(t_vars *vars, int keycode);
+int	new_dir_x(t_player player, double rad);
+int	new_dir_y(t_player player, double rad);
+int	new_pos_x(t_player player, int keycode);
+int	new_pos_y(t_player player, int keycode);
+
+void	err_terminate(char *errmsg);
+int	validate(t_info info);
 
 //-----------------------
 //    dda_algorithm.c -> raycasitng.c

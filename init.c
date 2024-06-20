@@ -53,13 +53,29 @@ void	texture_init(t_info *info, char **filedata)
 	{
 		splited = ft_split(filedata[i], ' ');
 		if (perfectly_match(splited[0], "NO"))
+		{
+			if (info->tex_no != NULL)
+				exit(EXIT_FAILURE);
 			info->tex_no = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "SO"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_so != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_so = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "WE"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_we != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_we = ft_strdup(splited[1]);
+		}
 		else if (perfectly_match(splited[0], "EA"))
-			info->tex_no = ft_strdup(splited[1]);
+		{
+			if (info->tex_ea != NULL)
+				exit(EXIT_FAILURE);
+			info->tex_ea = ft_strdup(splited[1]);
+		}
 		free(splited[0]);
 		free(splited[1]);
 		i++;
@@ -76,9 +92,17 @@ void	color_init(t_info *info, char **filedata)
 	{
 		splited = ft_split(filedata[i], ' ');
 		if (perfectly_match(splited[0], "F"))
+		{
+			if (info->floor_rgb != NULL)
+				exit(EXIT_FAILURE);
 			info->floor_rgb = ft_strdup(splited[1]);
+		}
 		if (perfectly_match(splited[0], "C"))
+		{
+			if (info->ceiling_rgb != NULL)
+				exit(EXIT_FAILURE);
 			info->ceiling_rgb = ft_strdup(splited[1]);
+		}
 		free(splited[0]);
 		free(splited[1]);
 		i++;
@@ -190,15 +214,10 @@ void	player_init(t_info *info)
 		x = 0;
 		while (map[y][x].type != 0)
 		{
-			if (is_player(map[y][x].type) == true)
-			{
-				info->player.pos_x = x;
-				info->player.pos_y = y;
-			}
 			if (map[y][x].type == 'N')
 			{
 				info->player.dir_x = 0;
-				info->player.dir_y = 1;
+				info->player.dir_y = -1;
 			}
 			if (map[y][x].type == 'E')
 			{
@@ -208,12 +227,19 @@ void	player_init(t_info *info)
 			if (map[y][x].type == 'S')
 			{
 				info->player.dir_x = 0;
-				info->player.dir_y = -1;
+				info->player.dir_y = 1;
 			}
 			if (map[y][x].type == 'W')
 			{
 				info->player.dir_x = -1;
 				info->player.dir_y = 0;
+			}
+			if (is_player(map[y][x].type) == true)
+			{
+				info->player.pos_x = x;
+				info->player.pos_y = y;
+				map[y][x].type = 'P';
+				return ;
 			}
 			x++;
 		}

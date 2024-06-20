@@ -25,8 +25,6 @@ void	init_tex_pixels(t_info *info)
 		info->tex_pixels[i] = ft_calloc(WIN_WIDTH + 1, sizeof(*(info->tex_pixels)));
 		i++;
 	}
-
-
 }
 
 void	render_frame(t_info *info)

@@ -12,8 +12,6 @@
 
 #include "cub3d.h"
 
-
-
 int	ft_abs(int value)
 {
 	if (value < 0)
