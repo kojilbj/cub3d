@@ -59,6 +59,7 @@ typedef struct	s_vars
 }	t_vars;
 
 void	info_init(t_info *info, char *path);
-void	ray_direct(t_info info);
+void	rotate_player(t_player *player, int keycode);
+void	move_player(t_vars *vars, int keycode);
 
 #endif
