@@ -52,22 +52,24 @@ typedef struct s_texinfo
 	double step;
 	double pos;
 	int index;
-
-} t_texinfo
+	
+} t_texinfo;
 
 typedef struct	s_info
 {
 	t_node	**map;
 	t_player	player;
+	t_texinfo *texture;
 	char	*tex_no;
 	char	*tex_so;
 	char	*tex_we;
 	char	*tex_ea;
 	char	*floor_rgb;
 	char	*ceiling_rgb;
-	int		**tex_list;//TODO: make & init this texture list
-}	t_info;
 
+	int		**tex_list;//TODO: make & init this texture list
+	int		**tex_pixels;//
+}	t_info;
 
 void	info_init(t_info *info, char *path);
 void	ray_direct(t_info info);

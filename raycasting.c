@@ -37,7 +37,7 @@ void	init_ray_info(int x, t_ray *ray, t_player *player)
 	ray->map_x = player->pos_x;
 	ray->map_y = player->pos_y;
 	if(ray->dir_x == 0)
-		ray->delta_dist_x = -1;//
+		ray->delta_dist_x = -1;
 	else
 		ray->delta_dist_x = ft_abs(1 / ray->dir_x);
 	if (ray->dir_y == 0)
@@ -75,7 +75,12 @@ bool is_hitting_wall(t_ray *ray, t_node **map)
 	return (false);
 }
 
-
+/*
+dda algorithm
+side_dist/x/y -> incleasing disitance from player's position to intger oordinate
+(step_x/y) = incleasing unit for maps to cast ray;
+hitwall = check ray hit the map wall
+*/
 void dda_algorithm(t_ray *ray, t_info *info)
 {
 	bool hit_wall;
@@ -103,7 +108,13 @@ void dda_algorithm(t_ray *ray, t_info *info)
 	}
 }
 
-
+/*
+wall_dist = inclease/decrease of ray
+wall_x -> distance of player's postion from hitting point of ray 
+line_hight -> texture7s hight
+strat_y -> start point y of drawing texture
+end_y -> end point y of drawing texture
+*/
 void	get_wall_dist(t_ray *ray, t_player *player)
 {
 	int wall_dist;
@@ -145,7 +156,14 @@ int	decide_dir_tex(t_ray *ray, t_player *player)
 	return (wall_tex);
 }
 
-void	set_tex_info(t_ray *ray)
+
+/* Struct Texture
+index -> which directions of texture by wall_tex
+x -> x coordinate of texture
+step -> 
+pos -> postion of texture
+*/
+void	set_tex_info(t_ray *ray, t_texinfo *texture)
 {
 	texture->index = decide_dir_tex(ray, info->player);
 	texture->x = (int)(ray->wall_x * TEX_SIZE);
@@ -155,7 +173,7 @@ void	set_tex_info(t_ray *ray)
 	teture->pos = (ray->start_y - WIN_HEIGHT / 2 + ray->line_height /2) * texture->step;
 }
 
-void	update_tex_info(t_ray *ray)
+void	update_tex_info(t_ray *ray, t_info *info, int x)
 {
 	int y;
 	int color;
@@ -164,14 +182,32 @@ void	update_tex_info(t_ray *ray)
 	y = ray->start_y;
 	while (y < ray->end_y)
 	{
-		texture->y = (int)texture->pos	& (TEX_SIZE - 1);
-		texture->pos += texture->step;
-		color = info->tex_list[texture->index][TEX_SIZE * texture->y + texture->x];
+		info->texture->y = (int)info->texture->pos	& (TEX_SIZE - 1);
+		info->texture->pos += info->texture->step;
+		color = info->tex_list[info->texture->index][TEX_SIZE * info->texture->y + info->texture->x];
 		if (ray->axis == Y_AXIS)
 			color = (color >> 1) & 8355711;
-		//info->something[y][x] = color
+		info->tex_pixels[y][x] = color;
 		y++;
 	}
+}
+
+void	initialize_ray(t_ray *ray)
+{
+	ray->cam_x = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->side_dist_x = 0;
+	ray->side_dist_y = 0;
+	ray->delta_dist_x = 0;
+	ray->delta_dist_y = 0;
+	ray->axis = 0;
+	ray->wall_x = 0;
+	ray->line_height = 0;
+	ray->start_y = 0;
+	ray->end_y = 0;
 }
 
 void	raycasting(t_info *info)
@@ -179,19 +215,15 @@ void	raycasting(t_info *info)
 	int	x;
 	t_ray ray;
 
+	initialize_ray(&ray);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		init_ray_info(x, &ray, info);
 		dda_algorithm(&ray, info);
 		get_wall_dist(ray, info->player);
-		/*
-		TODO:
-		set texture struct sonmewhere
-		change argv of  following funcs
-		*/
-		set_tex_info(ray);
-		update_tex_info(ray);
+		set_tex_info(ray, info->texture);
+		update_tex_info(ray, info, x);
 		x++;
 	}
 }
