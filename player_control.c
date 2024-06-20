@@ -6,7 +6,7 @@
 /*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:05:19 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/06/20 22:57:20 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:58:37 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	move_player(t_vars *vars, int keycode)
 		vars->info.player.pos_x = pos_x;
 		vars->info.player.pos_y = pos_y;
 		vars->info.map[pos_y][pos_x].type = 'P';
-	}last_pos_y
+	}
 }
