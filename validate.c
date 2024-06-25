@@ -33,8 +33,41 @@ int	map_validate(t_node **map)
 	}
 	return (fg);
 }
+/*
+static void	map_letter_validate_util(t_vars vars, char c, int *pfg)
+{
+	if (!(c == '1' || c == '0' || c == 'P'
+			|| c == '\n'))
+		terminate_program(vars, "Error\nMap contains invalid letter", 22);
+	if (c == 'P')
+		(*pfg)++;
+}
 
+void	map_letter_validate(t_vars vars)
+{
+	int		x;
+	int		y;
+	int		pfg;
+	char	c;
 
+	x = 0;
+	y = 0;
+	pfg = 0;
+	while (vars.map_info.map[y])
+	{
+		x = 0;
+		while (vars.map_info.map[y][x])
+		{
+			c = vars.map_info.map[y][x];
+			map_letter_validate_util(vars, c, &pfg);
+			x++;
+		}
+		y++;
+	}
+	if (pfg != 1)
+		terminate_program(vars, "Error\nMap must has only one Player", 22);
+}
+*/
 int	validate(t_info info)
 {
 	if (info.tex_no == NULL)
@@ -51,4 +84,5 @@ int	validate(t_info info)
 		err_terminate("Ceiling_RGB");
 	if (map_validate(info.map) == false)
 		err_terminate("Player");
+	//map_letter_validate();
 }

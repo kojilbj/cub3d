@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan <kojwatan@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/06/20 22:56:29 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/06/25 23:48:07 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ void	display_map(t_node **map)
 
 	x = 0;
 	y = 0;
-	while (map[y] != NULL)
-	{
+	while (map[y] != NULL) {
 		x = 0;
 		while (map[y][x].type != '\0')
 		{
@@ -31,7 +30,6 @@ void	display_map(t_node **map)
 		y++;
 	}
 }
-
 
 int	key_hook_handler(int keycode, t_vars *vars)
 {
@@ -54,7 +52,7 @@ int	main(int ac, char *av[])
 {
 	t_vars	vars;
 
-	info_init(&(vars.info), av[1]);
+	init_map_info(&(vars.info), av[1]);
 	validate(vars.info);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
