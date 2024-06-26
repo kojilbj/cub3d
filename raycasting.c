@@ -12,12 +12,6 @@
 
 #include "cub3d.h"
 
-int	ft_abs(int value)
-{
-	if (value < 0)
-		return -value;
-	return value;
-}
 /*
 initialize rays(struct ray)
 - x_cam -> where is camera(-1 <= x <= 1)
