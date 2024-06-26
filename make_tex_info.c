@@ -49,13 +49,13 @@ void	update_tex_info(t_ray *ray, t_info *info, int x)
 	int y;
 	int color;
 
-
 	y = ray->start_y;
+	printf("start :%d, end : %d\n", y ,ray->end_y);
 	while (y < ray->end_y)
 	{
-		info->texture->y = (int)info->texture->pos	& (TEX_SIZE - 1);
-		info->texture->pos += info->texture->step;
-		color = info->tex_list[info->texture->index][TEX_SIZE * info->texture->y + info->texture->x];
+		info->texture.y = (int)info->texture.pos & (TEX_SIZE - 1);
+		info->texture.pos += info->texture.step;
+		color = info->tex_list[info->texture.index][TEX_SIZE * info->texture.y + info->texture.x];
 		if (ray->axis == Y_AXIS)
 			color = (color >> 1) & 8355711;
 		info->tex_pixels[y][x] = color;

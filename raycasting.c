@@ -30,16 +30,10 @@ void	init_ray_info(int x, t_ray *ray, t_player player)
 	ray->cam_x = 2*x / (double)WIN_WIDTH - 1;
 	ray->dir_x = player.dir_x + (player.cam_palne_x * ray->cam_x);
 	ray->dir_y = player.dir_y + (player.cam_palne_y * ray->cam_x);
-	ray->map_x = player.pos_x;
-	ray->map_y = player.pos_y;
-	if(ray->dir_x == 0)
-		ray->delta_dist_x = -1;
-	else
-		ray->delta_dist_x = ft_abs(1 / ray->dir_x);
-	if (ray->dir_y == 0)
-		ray->delta_dist_y = -1;
-	else
-		ray->delta_dist_y = ft_abs(1 / ray->dir_y);
+	ray->map_x = (int)player.pos_x;
+	ray->map_y = (int)player.pos_y;
+	ray->delta_dist_x = fabs(1 / ray->dir_x);
+	ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 /*
 wall_dist = inclease/decrease of ray
@@ -50,7 +44,7 @@ end_y -> end point y of drawing texture
 */
 static void	get_wall_dist(t_ray *ray, t_player player)
 {
-	int wall_dist;
+	double wall_dist;
 
 	if (ray->axis == X_AXIS)
 	{
@@ -63,13 +57,13 @@ static void	get_wall_dist(t_ray *ray, t_player player)
 		ray->wall_x = player.pos_x + wall_dist * ray->dir_x; 
 	}
 	ray->wall_x -= floor(ray->wall_x);
-	ray->line_height = WIN_HEIGHT / wall_dist;
-	ray->start_y = (-ray->line_height / 2) + (WIN_HEIGHT / 2);
+	ray->line_height = (int)(WIN_HEIGHT / wall_dist);
+	ray->start_y = -(ray->line_height) / 2 + WIN_HEIGHT / 2;
 	if (ray->start_y < 0)
 		ray->start_y = 0;
-	ray->end_y = (ray->line_height / 2) + (WIN_HEIGHT /2);
-	if (WIN_HEIGHT <= ray->end_y)
-		ray->end_y = WIN_WIDTH - 1;
+	ray->end_y = ray->line_height / 2 + WIN_HEIGHT /2;
+	if (ray->end_y >= WIN_HEIGHT)
+		ray->end_y = WIN_HEIGHT - 1;
 }
 
 void	raycasting(t_info *info)
@@ -77,33 +71,15 @@ void	raycasting(t_info *info)
 	int	x;
 	t_ray ray;
 
-	ft_bzero(&ray, sizeof(ray));// initialize_ray(&ray);
+	ft_bzero(&ray, sizeof(ray));
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		init_ray_info(x, &ray, info->player);
 		dda_algorithm(&ray, info);
 		get_wall_dist(&ray, info->player);
-		set_tex_info(&ray, info->texture, info->player);
+		set_tex_info(&ray, &(info->texture), info->player);
 		update_tex_info(&ray, info, x);
 		x++;
 	}
 }
-
-// void	initialize_ray(t_ray *ray)
-// {
-// 	ray->cam_x = 0;
-// 	ray->dir_x = 0;
-// 	ray->dir_y = 0;
-// 	ray->map_x = 0;
-// 	ray->map_y = 0;
-// 	ray->side_dist_x = 0;
-// 	ray->side_dist_y = 0;
-// 	ray->delta_dist_x = 0;
-// 	ray->delta_dist_y = 0;
-// 	ray->axis = 0;
-// 	ray->wall_x = 0;
-// 	ray->line_height = 0;
-// 	ray->start_y = 0;
-// 	ray->end_y = 0;
-// }

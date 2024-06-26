@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_west_texture
+NO ./gyro0_map.xpm
+SO ./gyro_back_map.xpm
+WE ./gyro_left_map.xpm
+EA ./gyro_right_map.xpm
 
 C 225,30,0
 F 225,30,0

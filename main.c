@@ -64,6 +64,6 @@ int	main(int ac, char *av[])
 	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
 	mlx_hook(vars.win, 17, 1 << 17, terminate_handler, &vars);
-	// mlx_loop_hook()
+	mlx_loop_hook(vars.mlx, render, &(vars));
 	mlx_loop(vars.mlx);
 }

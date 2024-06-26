@@ -106,14 +106,13 @@ typedef struct s_texinfo
 	double	step;
 	double	pos;
 	int		index;
-	
 } t_texinfo;
 
 typedef struct	s_info
 {
 	t_node		**map;
 	t_player	player;
-	t_texinfo	*texture;
+	t_texinfo	texture;
 
 	char		*tex_no;
 	char		*tex_so;
@@ -150,10 +149,13 @@ void	err_terminate(char *errmsg);
 int		validate(t_info info);
 
 
-// void	initialize_tex_list(t_info *info);
 void	initialize_tex_list(t_vars *vars);
 
+//-----------------------
+//			  rendering.c
+//-----------------------
 void	rendering(t_vars *vars);
+int	render(t_vars *vars);
 
 //-----------------------
 //			 raycasting.c

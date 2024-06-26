@@ -56,3 +56,9 @@ void	rendering(t_vars *vars)
 	raycasting(&(vars->info));
 	render_frame(vars);
 }
+
+int	render(t_vars *vars)
+{
+	rendering(vars);
+	return (0);
+}
