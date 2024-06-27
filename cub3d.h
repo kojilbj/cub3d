@@ -59,7 +59,7 @@ typedef struct	s_vars
 }	t_vars;
 
 //init_functions
-void	init_info(t_info *info, char *path);
+void	init_map_info(t_info *info, char *path);
 int	color_init(t_info *info, char **filedata);
 int	texture_init(t_info *info, char **filedata);
 int	player_init(t_info *info, char **filedata);
@@ -76,10 +76,12 @@ int	new_pos_y(t_player player, int keycode);
 //validate_functions
 void	err_terminate(char *errmsg);
 int	validate(t_info info);
+int	file_name_validate(char *arg);
 
 //util_functions
 char	*file_to_string(char *path);
 int	perfectly_match(char *s1, char *s2);
+bool	is_player(char c);
 void	free_all(void **data);
 
 //wrapped_system-call_functions

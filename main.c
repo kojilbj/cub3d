@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/06/25 23:48:07 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/06/26 13:12:30 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ int	main(int ac, char *av[])
 {
 	t_vars	vars;
 
+	if (ac != 2)
+		err_terminate("Invalid argument(s).\n");
+	if (file_name_validate(av[1]) != 0)
+		err_terminate("Invalid map-file name.\n");
 	init_map_info(&(vars.info), av[1]);
 	validate(vars.info);
 	vars.mlx = mlx_init();

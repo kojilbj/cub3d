@@ -56,6 +56,22 @@ static int	west_tex_init(char **tex_we, char **sp)
 	return (0);
 }
 
+static int	texture_init_check(t_info info)
+{
+	int	ret;
+
+	ret = 0;
+	ret |= info.tex_no == NULL;
+	ret |= info.tex_so == NULL;
+	ret |= info.tex_ea == NULL;
+	ret |= info.tex_we == NULL;
+	if (ret != 0)
+		ft_putstr_fd("Error\ntexture info is not enough", STDERR_FILENO);
+	return (ret);
+}
+
+// return value should be caluculated with bit operations. like ret | tex_*_init
+// duplicated info is detected by return value, not also non-exitent.
 int	texture_init(t_info *info, char **filedata)
 {
 	size_t	i;
@@ -69,7 +85,6 @@ int	texture_init(t_info *info, char **filedata)
 		splited = ft_split(filedata[i], ' ');
 		if (splited == NULL)
 			return 1; 
-		// return value should be caluculated with bit operations. like ret | tex_*_init
 		ret |= north_tex_init(&(info->tex_no), splited);
 		ret |= south_tex_init(&(info->tex_so), splited);
 		ret |= east_tex_init(&(info->tex_ea), splited);
@@ -78,5 +93,6 @@ int	texture_init(t_info *info, char **filedata)
 		free(splited[1]);
 		i++;
 	}
+	ret |= texture_init_check(*info);
 	return (ret);
 }
