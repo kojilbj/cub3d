@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:05:43 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:36:37 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		color_init(t_info *info, char **filedata);
 //-----------------------
 int		color_range_check(char *str);
 bool	is_valid_format(char *str);
-int	convert_str_to_rgb(char *str);
+int		convert_str_to_rgb(char *str);
 
 //-----------------------
 //			texture_init1.c
