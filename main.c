@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:24:51 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 18:21:21 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
-		free(vars->mlx);
-		free(vars->win);
+		//free(vars->mlx);
+		//free(vars->win);
 		free_info(vars->info);
 		// sleep(10);//to monitor momory-leaks
 		exit(EXIT_SUCCESS);
@@ -80,7 +80,6 @@ int	main(int ac, char *av[])
 		free_info(vars.info);
 		return (1);
 	}
-	//printf("%d\n", vars.info.ceiling_rgb);
 	//validate(vars.info);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");

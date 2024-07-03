@@ -3,8 +3,8 @@ SO textures/purple_stone.xpm
 WE textures/red_brick.xpm
 EA textures/wood.xpm
 
-C 225,30,0
-F 225,30,0
+C 1,0,0
+F 225,225,225
 
         111111111111111111111111
         1000000000110000000000001

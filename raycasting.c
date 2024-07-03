@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hoyuki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:49:56 by hosonu            #+#    #+#             */
-/*   Updated: 2024/06/19 15:50:00 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/07/03 22:58:53 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,18 @@ initialize rays(struct ray)
 - x/y_map -> current position of ray on map
 - delta_dist_x/y -> inclease of ditance acheving grid line 
 */
+
 void	init_ray_info(int x, t_ray *ray, t_player player)
 {
-	ray->cam_x = 2*x / (double)WIN_WIDTH - 1;
-	ray->dir_x = player.dir_x + (player.cam_palne_x * ray->cam_x);
-	ray->dir_y = player.dir_y + (player.cam_palne_y * ray->cam_x);
+	ray->cam_x = 2 * x / (double)WIN_WIDTH - 1;
+	ray->dir_x = player.dir_x + -player.dir_y * 0.66 * ray->cam_x;
+	ray->dir_y = player.dir_y + player.dir_x * 0.66 * ray->cam_x;
 	ray->map_x = (int)player.pos_x;
 	ray->map_y = (int)player.pos_y;
 	ray->delta_dist_x = fabs(1 / ray->dir_x);
 	ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
+
 /*
 wall_dist = inclease/decrease of ray
 wall_x -> distance of player's postion from hitting point of ray 
@@ -36,6 +38,7 @@ line_hight -> texture7s hight
 strat_y -> start point y of drawing texture
 end_y -> end point y of drawing texture
 */
+
 static void	get_wall_dist(t_ray *ray, t_player player)
 {
 	double wall_dist;
@@ -52,10 +55,10 @@ static void	get_wall_dist(t_ray *ray, t_player player)
 	}
 	ray->wall_x -= floor(ray->wall_x);
 	ray->line_height = (int)(WIN_HEIGHT / wall_dist);
-	ray->start_y = -(ray->line_height) / 2 + WIN_HEIGHT / 2;
+	ray->start_y = -(ray->line_height) / 2 + (WIN_HEIGHT / 2);
 	if (ray->start_y < 0)
 		ray->start_y = 0;
-	ray->end_y = ray->line_height / 2 + WIN_HEIGHT /2;
+	ray->end_y = ray->line_height / 2 + (WIN_HEIGHT / 2);
 	if (ray->end_y >= WIN_HEIGHT)
 		ray->end_y = WIN_HEIGHT - 1;
 }

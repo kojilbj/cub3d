@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:05:43 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 21:24:18 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@
 //--------------------
 //				WINDOW
 //--------------------
-# define TEX_SIZE 64
-# define WIN_WIDTH 720
-# define WIN_HEIGHT 360
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720 
 
 // 180 * M_PI / 180 = RAD_PI
 # define RAD_PI 3.14159265358979323846
@@ -170,6 +169,9 @@ int	convert_str_to_rgb(char *str);
 //			texture_init1.c
 //-----------------------
 int		texture_init(t_info *info, char **filedata);
+
+
+
 
 //-----------------------
 //			texture_init2.c

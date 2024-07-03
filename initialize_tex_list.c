@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_tex_list.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hoyuki@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:56:25 by hosonu            #+#    #+#             */
-/*   Updated: 2024/06/20 16:56:28 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/07/03 19:03:26 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int *get_img_from_xpm(t_vars *vars, char *path)
 		x = 0;
 		while (x < TEX_SIZE)
 		{
-			buffer[y * TEX_SIZE + x] = tmp.addr[y * TEX_SIZE + x];
+			buffer[(y * TEX_SIZE) + x] = tmp.addr[(y * TEX_SIZE) + x];
 			x++;
 		}
 		y++;
