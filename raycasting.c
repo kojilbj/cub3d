@@ -21,7 +21,7 @@ initialize rays(struct ray)
 */
 void	init_ray_info(int x, t_ray *ray, t_player player)
 {
-	ray->cam_x = 2*x / (double)WIN_WIDTH - 1;
+	ray->cam_x = 2 * x / (double)WIN_WIDTH - 1;
 	ray->dir_x = player.dir_x + (player.cam_palne_x * ray->cam_x);
 	ray->dir_y = player.dir_y + (player.cam_palne_y * ray->cam_x);
 	ray->map_x = (int)player.pos_x;
