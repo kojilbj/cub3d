@@ -6,23 +6,23 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 12:25:19 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:08:34 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./cub3d.h"
 
-static int	floor_color_init(char **floor_rgb, char **sp)
+static int	floor_color_init(int *floor_rgb, char **sp)
 {
 	if (perfectly_match(sp[0], "F"))
 	{
-		if (*floor_rgb != NULL)
+		if (*floor_rgb != 0)
 		{
 			put_error("Floor color is duplicated\n");
 			return (1);
 		}
 		if (is_valid_format(sp[1]) == true && color_range_check(sp[1]) == 0)
-			*floor_rgb = ft_strdup(sp[1]);
+			*floor_rgb = convert_str_to_rgb(sp[1]);
 		else
 		{
 			put_error("Invalid RGB range.\n");
@@ -32,17 +32,17 @@ static int	floor_color_init(char **floor_rgb, char **sp)
 	return (0);
 }
 
-static int	ceiling_color_init(char **ceiling_rgb, char **sp)
+static int	ceiling_color_init(int *ceiling_rgb, char **sp)
 {
 	if (perfectly_match(sp[0], "C"))
 	{
-		if (*ceiling_rgb != NULL)
+		if (*ceiling_rgb != 0)
 		{
 			put_error("Ceiling color is duplicated\n");
 			return (1);
 		}
 		if (is_valid_format(sp[1]) == true && color_range_check(sp[1]) == 0)
-			*ceiling_rgb = ft_strdup(sp[1]);
+			*ceiling_rgb = convert_str_to_rgb(sp[1]);
 		else
 		{
 			put_error("Invalid RGB range.\n");
@@ -57,8 +57,8 @@ static int	color_init_check(t_info info)
 	int	ret;
 
 	ret = 0;
-	ret |= info.floor_rgb == NULL;
-	ret |= info.ceiling_rgb == NULL;
+	ret |= info.floor_rgb == 0;
+	ret |= info.ceiling_rgb == 0;
 	if (ret != 0)
 		put_error("Floor or(and) Ceiling color does not exist\n");
 	return (ret);

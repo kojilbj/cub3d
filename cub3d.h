@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:45:25 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:05:43 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_info
 	char		*tex_so;
 	char		*tex_we;
 	char		*tex_ea;
-	char		*floor_rgb;
-	char		*ceiling_rgb;
+	int			floor_rgb;
+	int			ceiling_rgb;
 }	t_info;
 
 typedef struct s_vars
@@ -88,6 +88,7 @@ int		color_init(t_info *info, char **filedata);
 //-----------------------
 int		color_range_check(char *str);
 bool	is_valid_format(char *str);
+int	convert_str_to_rgb(char *str);
 
 //-----------------------
 //			texture_init1.c
