@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:58:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:16:01 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:21:17 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	convert_str_to_rgb(char *str)
 	sp = ft_split(str, ',');
 	while (sp[i] != NULL)
 	{
-		rgb = rgb << 2;
+		rgb = rgb << 8;
 		rgb = rgb + ft_atoi(sp[i]);
 		i++;
 	}
