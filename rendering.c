@@ -32,12 +32,8 @@ static void	init_tex_pixels(t_info *info)
 
 static void	render_frame(t_vars *vars)
 {
-
-	
 	int		x;
 	int		y;
-	int		floor_color = 0xAAAAAA; // Gray color for the floor
-	int		ceiling_color = 0xDDDDFF; // Light blue color for the ceiling
 	t_img	img;
 
 	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
@@ -48,13 +44,14 @@ static void	render_frame(t_vars *vars)
 		x = 0;
     	while (x < WIN_WIDTH)
     	{
-        	// img.addr[y * WIN_WIDTH + x] = vars->info.tex_pixels[y][x];
 			if (vars->info.tex_pixels[y][x] > 0)
-        		img.addr[y * WIN_WIDTH + x] = vars->info.tex_pixels[y][x]; // Existing texture mapping
+			{
+        		img.addr[y * WIN_WIDTH + x] = vars->info.tex_pixels[y][x];
+			}
 			else if (y < WIN_HEIGHT / 2)
-				img.addr[y * WIN_WIDTH + x] = ceiling_color; // Set ceiling color
+				img.addr[y * WIN_WIDTH + x] = vars->info.ceiling_rgb;
 			else if (y > WIN_HEIGHT - 1)
-				img.addr[y * WIN_WIDTH + x] = floor_color; // Set floor color
+				img.addr[y * WIN_WIDTH + x] = vars->info.floor_rgb;
 			x++;
     	}
 		y++;
