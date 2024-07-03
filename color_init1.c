@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:08:34 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:33:17 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	floor_color_init(int *floor_rgb, char **sp)
 {
 	if (perfectly_match(sp[0], "F"))
 	{
-		if (*floor_rgb != 0)
+		if (*floor_rgb != -1)
 		{
 			put_error("Floor color is duplicated\n");
 			return (1);
@@ -36,7 +36,7 @@ static int	ceiling_color_init(int *ceiling_rgb, char **sp)
 {
 	if (perfectly_match(sp[0], "C"))
 	{
-		if (*ceiling_rgb != 0)
+		if (*ceiling_rgb != -1)
 		{
 			put_error("Ceiling color is duplicated\n");
 			return (1);
@@ -57,8 +57,8 @@ static int	color_init_check(t_info info)
 	int	ret;
 
 	ret = 0;
-	ret |= info.floor_rgb == 0;
-	ret |= info.ceiling_rgb == 0;
+	ret |= info.floor_rgb == -1;
+	ret |= info.ceiling_rgb == -1;
 	if (ret != 0)
 		put_error("Floor or(and) Ceiling color does not exist\n");
 	return (ret);

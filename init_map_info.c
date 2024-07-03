@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:53 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 12:20:40 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 17:32:39 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	init_map_info(t_info *info, char *path)
 	char	**splited;
 
 	ft_bzero(info, sizeof(t_info));
+	info->ceiling_rgb = -1;
+	info->floor_rgb = -1;
 	filedata = file_to_string(path);
 	if (filedata == NULL)
 		return (1);
