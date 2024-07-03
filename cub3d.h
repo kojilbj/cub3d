@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/07/03 11:08:10 by watanabekoj      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 #define CUB3D_H
 
@@ -59,11 +71,21 @@ typedef struct	s_vars
 }	t_vars;
 
 //init_functions
-void	init_map_info(t_info *info, char *path);
+int	init_map_info(t_info *info, char *path);
 int	color_init(t_info *info, char **filedata);
+bool	is_valid_format(char *str);
+int	color_range_check(char *str);
 int	texture_init(t_info *info, char **filedata);
+int	north_tex_init(char **tex_no, char **sp);
+int	south_tex_init(char **tex_so, char **sp);
+int	east_tex_init(char **tex_ea, char **sp);
+int	west_tex_init(char **tex_we, char **sp);
 int	player_init(t_info *info, char **filedata);
 int	map_init(t_info *info, char **filedata);
+bool	is_valid_line(char *line);
+bool	is_valid_map(t_node **map);
+bool	is_boader_of_map(t_node **map, int x, int y);
+bool	is_next_to_blank(t_node **map, int x, int y);
 
 //control_player_functions
 void	rotate_player(t_player *player, int keycode);
@@ -74,7 +96,7 @@ int	new_pos_x(t_player player, int keycode);
 int	new_pos_y(t_player player, int keycode);
 
 //validate_functions
-void	err_terminate(char *errmsg);
+void	put_error(char *errmsg);
 int	validate(t_info info);
 int	file_name_validate(char *arg);
 
@@ -83,6 +105,7 @@ char	*file_to_string(char *path);
 int	perfectly_match(char *s1, char *s2);
 bool	is_player(char c);
 void	free_all(void **data);
+void	free_info(t_info info);
 
 //wrapped_system-call_functions
 int	x_open(char *path, int oflag);

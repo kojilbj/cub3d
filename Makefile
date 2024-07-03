@@ -1,6 +1,15 @@
-CC = cc -g -fsanitize=address
-#CFLAGS = -Wextra -Wall -Werror
-SRCS = main.c init_map_info.c player_control.c validate.c x_func.c color_init.c player_init.c texture_init.c map_init.c custom_free.c file_to_string.c
+CC = cc
+#CC += -g -fsanitize=address
+CFLAGS = -Wextra -Wall -Werror
+SRCS = main.c init_map_info.c \
+	rotate_player.c move_player.c \
+	validate.c x_func.c \
+	color_init1.c color_init2.c \
+	file_to_string.c\
+	player_init.c texture_init1.c \
+	texture_init2.c \
+	map_init1.c map_init2.c \
+	map_init3.c custom_free.c \
 
 OBJS = $(SRCS:.c=.o)
 NAME = cub3d

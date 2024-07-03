@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 22:48:28 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/07/03 11:00:44 by watanabekoj      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./cub3d.h"
 
-bool is_player(char c)
+bool	is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (true);
@@ -42,7 +54,7 @@ static int	pos_init(t_player *player, int x, int y)
 	return (0);
 }
 
-static int player_init_check(t_player player)
+static int	player_init_check(t_player player)
 {
 	int	val;
 
@@ -61,7 +73,7 @@ int	player_init(t_info *info, char **filedata)
 {
 	size_t	x;
 	size_t	y;
-	int	ret;
+	int		ret;
 	char	**map;
 
 	map = &filedata[6];
@@ -82,6 +94,6 @@ int	player_init(t_info *info, char **filedata)
 		y++;
 	}
 	if (ret != 0 || player_init_check(info->player))
-		ft_putstr_fd("Error\nInvalid player.", STDERR_FILENO);
+		put_error("player.");
 	return (ret || player_init_check(info->player));
 }

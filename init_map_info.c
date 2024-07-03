@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map_info.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 22:49:53 by kojwatan          #+#    #+#             */
+/*   Updated: 2024/07/03 11:10:07 by watanabekoj      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	perfectly_match(char *s1, char *s2)
@@ -15,21 +27,25 @@ int	perfectly_match(char *s1, char *s2)
 	return (true);
 }
 
-void	init_map_info(t_info *info, char *path)
+int	init_map_info(t_info *info, char *path)
 {
-	int	fd;
 	char	*filedata;
 	char	**splited;
 
 	ft_bzero(info, sizeof(t_info));
 	filedata = file_to_string(path);
 	if (filedata == NULL)
-		return ;
+		return (1);
 	splited = ft_split(filedata, '\n');
-	texture_init(info, splited);
-	color_init(info, splited);
-	player_init(info, splited);
-	map_init(info, splited);
+	if (texture_init(info, splited) != 0)
+		return (1);
+	if (color_init(info, splited) != 0)
+		return (2);
+	if (player_init(info, splited) != 0)
+		return (3);
+	if (map_init(info, splited) != 0)
+		return (4);
 	free_all((void **)splited);
 	free(splited);
+	return (0);
 }
