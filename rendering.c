@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:09:54 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/03 20:15:29 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 23:15:46 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,17 @@ static void	render_frame(t_vars *vars)
 	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = (int *)mlx_get_data_addr(img.img, &img.bites_per_pixel, &img.size_line, &img.endian);
 	y = 0;
-    while (y < WIN_HEIGHT)
+	while (y < WIN_HEIGHT)
 	{
 		x = 0;
-		while (x < WIN_WIDTH)
+    	while (x < WIN_WIDTH)
     	{
 			if (vars->info.tex_pixels[y][x] > 0)
-<<<<<<< HEAD
         		img.addr[y * (img.size_line / 4)+ x] = vars->info.tex_pixels[y][x];
 			else if (y < WIN_HEIGHT / 2)
 				img.addr[(y * (img.size_line / 4)) + x] = vars->info.ceiling_rgb;
 			else if (y < (WIN_HEIGHT - 1))
 				img.addr[(y * (img.size_line / 4)) + x] = vars->info.floor_rgb;
-=======
-        		img.addr[y * (img.size_line / 4) + x] = vars->info.tex_pixels[y][x];
-			else if (y < WIN_HEIGHT / 2)
-				img.addr[y * (img.size_line / 4) + x] = vars->info.ceiling_rgb;
-			else if (y < WIN_HEIGHT - 1)
-				img.addr[y * (img.size_line / 4) + x] = vars->info.floor_rgb;
->>>>>>> origin/check_render_map
 			x++;
     	}
 		y++;

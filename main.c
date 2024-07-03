@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 18:21:21 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 23:17:31 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int	main(int ac, char *av[])
 	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
 	mlx_hook(vars.win, 17, 1 << 17, terminate_handler, &vars);
-	// mlx_loop_hook(vars.mlx, render, &(vars));
+	mlx_loop_hook(vars.mlx, render, &(vars));
 	mlx_loop(vars.mlx);
 }
