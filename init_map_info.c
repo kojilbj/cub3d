@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:53 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:10:07 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 12:20:40 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	init_map_info(t_info *info, char *path)
 	if (filedata == NULL)
 		return (1);
 	splited = ft_split(filedata, '\n');
+	free(filedata);
 	if (texture_init(info, splited) != 0)
 		return (1);
 	if (color_init(info, splited) != 0)

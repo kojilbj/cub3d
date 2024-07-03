@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:09:26 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 12:30:07 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		mlx_destroy_display(vars->mlx);
+		free(vars->mlx);
+		free(vars->win);
 		free_info(vars->info);
+		sleep(10);//to monitor momory-leaks
 		exit(EXIT_SUCCESS);
 	}
 	rotate_player(&(vars->info.player), keycode);
@@ -53,6 +56,7 @@ int	terminate_handler(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free_info(vars->info);
+	sleep(10);//to monitor momory-leaks
 	exit(EXIT_SUCCESS);
 	return (0);
 }

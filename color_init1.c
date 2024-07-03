@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:36 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:10:21 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 12:25:19 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	color_init(t_info *info, char **filedata)
 		splited = ft_split(filedata[i], ' ');
 		ret |= floor_color_init(&(info->floor_rgb), splited);
 		ret |= ceiling_color_init(&(info->ceiling_rgb), splited);
-		free(splited[0]);
-		free(splited[1]);
+		free_all((void **)splited);
+		free(splited);
 		i++;
 	}
 	ret |= color_init_check(*info);

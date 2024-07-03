@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:19:10 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/03 12:25:42 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ int	texture_init(t_info *info, char **filedata)
 		ret |= south_tex_init(&(info->tex_so), splited);
 		ret |= east_tex_init(&(info->tex_ea), splited);
 		ret |= west_tex_init(&(info->tex_we), splited);
-		free(splited[0]);
-		free(splited[1]);
+		free_all((void **)splited);
+		free(splited);
 		i++;
 	}
-	free(splited);
 	ret |= texture_init_check(*info);
 	return (ret);
 }
