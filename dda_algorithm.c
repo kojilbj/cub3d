@@ -36,7 +36,7 @@ static int get_dir_y_step(t_ray *ray, t_player *player)
 
 static bool is_hitting_wall(t_node **map, t_ray *ray)
 {
-	if ('1' == map[ray->map_y][ray->map_x].type)
+	if (map[ray->map_y][ray->map_x].type > '0')
 		return (true);
 	return (false);
 }
@@ -70,6 +70,9 @@ void dda_algorithm(t_ray *ray, t_info *info)
 			ray->map_y += step_y;
 			ray->axis = Y_AXIS;
 		}
+		if (ray->map_y < 0.25
+			|| ray->map_x < 0.25)
+			break ;
 		hit_wall = is_hitting_wall(info->map, ray);
 	}
 }
