@@ -120,6 +120,7 @@ typedef struct	s_info
 	char		*tex_ea;
 	char		*floor_rgb;
 	char		*ceiling_rgb;
+	int			color_code
 
 	int			**tex_list;
 	int			**tex_pixels;

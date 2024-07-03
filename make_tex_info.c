@@ -50,7 +50,7 @@ void	update_tex_info(t_ray *ray, t_info *info, int x)
 	int color;
 
 	y = ray->start_y;
-	printf("start :%d, end : %d\n", y ,ray->end_y);
+	// printf("start :%d, end : %d\n", y ,ray->end_y);
 	while (y < ray->end_y)
 	{
 		info->texture.y = (int)info->texture.pos & (TEX_SIZE - 1);

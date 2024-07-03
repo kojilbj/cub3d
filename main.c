@@ -60,6 +60,8 @@ int	main(int ac, char *av[])
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 
+
+	printf("floor: %s, cell :%s", vars.info.floor_rgb, vars.info.ceiling_rgb);
 	initialize_tex_list(&vars);
 	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
