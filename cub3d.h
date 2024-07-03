@@ -20,6 +20,9 @@
 # include <stdio.h>
 # include <math.h>
 
+//--------------------
+//				WINDOW
+//--------------------
 # define TEX_SIZE 64
 # define WIN_WIDTH 720
 # define WIN_HEIGHT 360
@@ -37,6 +40,69 @@
 # define RIGHT 100
 # define LEFT 97
 
+//--------------------
+//			RAYCASTING
+//--------------------
+# define X_AXIS 0
+# define Y_AXIS 1
+
+//---------------------
+//				TEXTURE
+//---------------------
+#define TEX_SIZE 64
+# define SOUTH_WALL 0
+# define NORTH_WALL 1
+# define EAST_WALL 2 
+# define WEST_WALL 3
+
+enum e_tex_list_index
+{
+    NORTH = 0,
+    SOUTH = 1,
+    EAST = 2,
+    WEST = 3
+};
+
+//-------------------------------//
+			/*STRUCTURES*/			
+//------------------------------//
+
+typedef struct s_img
+{
+	void	*img;
+	int		*addr;
+	int		bites_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_img;
+
+typedef struct s_ray
+{
+	double	cam_x;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		axis;
+	double	wall_x;
+	int		line_height;
+	int		start_y;
+	int		end_y;
+} t_ray;
+
+typedef struct s_texinfo
+{
+	int		x;
+	int		y;
+	double	step;
+	double	pos;
+	int		index;
+} t_texinfo;
+
 typedef struct s_node
 {
 	int		x;
@@ -51,18 +117,24 @@ typedef struct s_player
 	int	pos_y;
 	int	dir_x;
 	int	dir_y;
+	double	cam_palne_x;
+	double	cam_palne_y;
 }	t_player;
 
 typedef struct s_info
 {
 	t_node		**map;
 	t_player	player;
+	t_texinfo	texture;
 	char		*tex_no;
 	char		*tex_so;
 	char		*tex_we;
 	char		*tex_ea;
 	int			floor_rgb;
 	int			ceiling_rgb;
+
+	int			**tex_list;
+	int			**tex_pixels;
 }	t_info;
 
 typedef struct s_vars
@@ -71,6 +143,10 @@ typedef struct s_vars
 	void	*win;
 	t_info	info;
 }	t_vars;
+
+//-------------------------------//
+			/*FUNCTIONS*/			
+//------------------------------//
 
 //-----------------------
 //			init_map_info.c
@@ -139,6 +215,34 @@ int		new_dir_y(t_player player, double rad);
 void	move_player(t_vars *vars, int keycode);
 int		new_pos_x(t_player player, int keycode);
 int		new_pos_y(t_player player, int keycode);
+
+//-----------------------
+//  initialize_tex_list.c
+//-----------------------
+void	initialize_tex_list(t_vars *vars);
+
+//-----------------------
+//			  rendering.c
+//-----------------------
+void	rendering(t_vars *vars);
+int	render(t_vars *vars);
+
+//-----------------------
+//			 raycasting.c
+//-----------------------
+void	raycasting(t_info *info);
+
+//-----------------------
+//    	  dda_algorithm.c -> raycasitng.c
+//-----------------------
+void	dda_algorithm(t_ray *ray, t_info *info);
+
+//------------------------
+//		   make_tex_info.c  -> raycasitng.c
+//------------------------
+void	set_tex_info(t_ray *ray, t_texinfo *texture, t_player player);
+void	update_tex_info(t_ray *ray, t_info *info, int x);
+
 
 //-----------------------
 //			validate.c
