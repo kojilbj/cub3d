@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/05 02:35:14 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/09 23:41:16 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	key_hook_handler(int keycode, t_vars *vars)
 		// sleep(10);//to monitor momory-leaks
 		exit(EXIT_SUCCESS);
 	}
-	rotate_player(&(vars->info.player), keycode);
+	if (keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
+		rotate_camera(vars, keycode);
 	move_player(vars, keycode);
 	display_map(vars->info.map);
 	rendering(vars);
