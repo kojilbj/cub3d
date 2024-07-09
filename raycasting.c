@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:49:56 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/03 23:23:40 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/09 14:26:56 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,26 @@ initialize rays(struct ray)
 void	init_ray_info(int x, t_ray *ray, t_player player)
 {
 	ray->cam_x = 2 * x / (double)WIN_WIDTH - 1;
-	ray->dir_x = player.dir_x + -player.dir_y * 0.66 * ray->cam_x;
-	ray->dir_y = player.dir_y + player.dir_x * 0.66 * ray->cam_x;
-	ray->map_x = (int)player.pos_x;
-	ray->map_y = (int)player.pos_y;
-	ray->delta_dist_x = fabs(1 / ray->dir_x);
-	ray->delta_dist_y = fabs(1 / ray->dir_y);
+	ray->dir_x = player.dir_x + (-player.dir_y * 0.66 * ray->cam_x);
+	ray->dir_y = player.dir_y + (player.dir_x * 0.66 * ray->cam_x);
+	ray->map_x = player.pos_x;
+	ray->map_y = player.pos_y;
+	// if (ray->dir_x == 0)
+	// 	ray->delta_dist_x = 1e30;
+	// else
+	// 	ray->delta_dist_x = 1 / fabs(ray->dir_x);
+	// if (ray->dir_y == 0)
+	// 	ray->delta_dist_y = 1e30;
+	// else
+	// 	ray->delta_dist_y = 1 / fabs(ray->dir_y);
+	if (fabs(ray->dir_x) < 1e-6) // 非常に小さい値を防ぐために閾値を設定
+        ray->delta_dist_x = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
+    else
+        ray->delta_dist_x = fabs(1 / ray->dir_x);
+    if (fabs(ray->dir_y) < 1e-6) // 同様に、非常に小さい値を防ぐために閾値を設定
+        ray->delta_dist_y = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
+    else
+        ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 
 /*

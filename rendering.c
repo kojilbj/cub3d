@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:09:54 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/03 23:15:46 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/09 14:11:31 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	render_frame(t_vars *vars)
     	while (x < WIN_WIDTH)
     	{
 			if (vars->info.tex_pixels[y][x] > 0)
-        		img.addr[y * (img.size_line / 4)+ x] = vars->info.tex_pixels[y][x];
+        		img.addr[y * (img.size_line / 4) + x] = vars->info.tex_pixels[y][x];
 			else if (y < WIN_HEIGHT / 2)
 				img.addr[(y * (img.size_line / 4)) + x] = vars->info.ceiling_rgb;
 			else if (y < (WIN_HEIGHT - 1))

@@ -6,17 +6,19 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 00:26:12 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/03 22:59:02 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/05 09:33:44 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 /* Struct Texture
 index -> which directions of texture by wall_tex
 x -> x coordinate of texture
 step -> 
 pos -> postion of texture
 */
+
 static int	decide_dir_tex(t_ray *ray, t_player player)
 {
 	int	wall_tex;
@@ -25,12 +27,12 @@ static int	decide_dir_tex(t_ray *ray, t_player player)
 		if (ray->map_y < player.pos_y)
 			wall_tex = WEST_WALL;
 		else
-		wall_tex = WEST_WALL;
+		wall_tex = EAST_WALL;
 	}
 	else if (ray->map_x < player.pos_x)
-		wall_tex = WEST_WALL;
+		wall_tex = SOUTH_WALL;
 	else
-		wall_tex = WEST_WALL;
+		wall_tex = NORTH_WALL;
 	return (wall_tex);
 }
 
