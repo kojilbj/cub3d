@@ -12,46 +12,48 @@
 
 #include "cub3d.h"
 
-static int get_dir_x_step(t_ray *ray, t_player *player)
+static int	get_dir_x_step(t_ray *ray, t_player *player)
 {
 	if (ray->dir_x < 0)
 	{
-		ray->side_dist_x = ((player->pos_x - ray->map_x) + 0.5) * ray->delta_dist_x;
+		ray->side_dist_x = ((player->pos_x - ray->map_x) + 0.5)
+			* ray->delta_dist_x;
 		return (-1);
 	}
 	ray->side_dist_x = ((ray->map_x - player->pos_x) + 0.5) * ray->delta_dist_x;
 	return (1);
 }
 
-static int get_dir_y_step(t_ray *ray, t_player *player)
+static int	get_dir_y_step(t_ray *ray, t_player *player)
 {
 	if (ray->dir_y < 0)
 	{
-		ray->side_dist_y = ((player->pos_y - ray->map_y) + 0.5) * ray->delta_dist_y;
+		ray->side_dist_y = ((player->pos_y - ray->map_y) + 0.5)
+			* ray->delta_dist_y;
 		return (-1);
 	}
 	ray->side_dist_y = ((ray->map_y - player->pos_y) + 0.5) * ray->delta_dist_y;
 	return (1);
 }
 
-static bool is_hitting_wall(t_node **map, t_ray *ray)
+static bool	is_hitting_wall(t_node **map, t_ray *ray)
 {
 	if (map[ray->map_y][ray->map_x].type == '1')
 		return (true);
 	return (false);
 }
-//  && map[ray->map_x][ray->map_y].type <= '9'
+
 /*
 dda algorithm
 side_dist/x/y -> incleasing disitance from player's position to intger oordinate
 (step_x/y) = incleasing unit for maps to cast ray;
 hitwall = check ray hit the map wall
 */
-void dda_algorithm(t_ray *ray, t_info *info)
+void	dda_algorithm(t_ray *ray, t_info *info)
 {
-	bool hit_wall;
-	int step_x;
-	int step_y;
+	bool	hit_wall;
+	int		step_x;
+	int		step_y;
 
 	step_x = get_dir_x_step(ray, &(info->player));
 	step_y = get_dir_y_step(ray, &(info->player));

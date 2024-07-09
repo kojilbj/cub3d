@@ -24,3 +24,16 @@ int	x_open(char *path, int oflag)
 	}
 	return (fd);
 }
+
+void	double_free(int **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}

@@ -267,5 +267,6 @@ void	free_info(t_info info);
 //			x_func.c
 //-----------------------
 int		x_open(char *path, int oflag);
+void	double_free(int **tab);
 
 #endif

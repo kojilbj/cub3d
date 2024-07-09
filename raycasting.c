@@ -27,22 +27,14 @@ void	init_ray_info(int x, t_ray *ray, t_player player)
 	ray->dir_y = player.dir_y + (player.dir_x * 0.66 * ray->cam_x);
 	ray->map_x = player.pos_x;
 	ray->map_y = player.pos_y;
-	// if (ray->dir_x == 0)
-	// 	ray->delta_dist_x = 1e30;
-	// else
-	// 	ray->delta_dist_x = 1 / fabs(ray->dir_x);
-	// if (ray->dir_y == 0)
-	// 	ray->delta_dist_y = 1e30;
-	// else
-	// 	ray->delta_dist_y = 1 / fabs(ray->dir_y);
 	if (fabs(ray->dir_x) < 1e-6) // 非常に小さい値を防ぐために閾値を設定
-        ray->delta_dist_x = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
-    else
-        ray->delta_dist_x = fabs(1 / ray->dir_x);
-    if (fabs(ray->dir_y) < 1e-6) // 同様に、非常に小さい値を防ぐために閾値を設定
-        ray->delta_dist_y = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
-    else
-        ray->delta_dist_y = fabs(1 / ray->dir_y);
+		ray->delta_dist_x = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
+	else
+		ray->delta_dist_x = fabs(1 / ray->dir_x);
+	if (fabs(ray->dir_y) < 1e-6) // 同様に、非常に小さい値を防ぐために閾値を設定
+		ray->delta_dist_y = 1e6; // 非常に大きな値ではなく、適度に大きな値を設定
+	else
+		ray->delta_dist_y = fabs(1 / ray->dir_y);
 }
 
 /*
@@ -52,10 +44,9 @@ line_hight -> texture7s hight
 strat_y -> start point y of drawing texture
 end_y -> end point y of drawing texture
 */
-
 static void	get_wall_dist(t_ray *ray, t_player player)
 {
-	double wall_dist;
+	double	wall_dist;
 
 	if (ray->axis == X_AXIS)
 	{
@@ -65,7 +56,7 @@ static void	get_wall_dist(t_ray *ray, t_player player)
 	else
 	{
 		wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-		ray->wall_x = player.pos_x + wall_dist * ray->dir_x; 
+		ray->wall_x = player.pos_x + wall_dist * ray->dir_x;
 	}
 	ray->wall_x -= floor(ray->wall_x);
 	ray->line_height = (int)(WIN_HEIGHT / wall_dist);
@@ -79,8 +70,8 @@ static void	get_wall_dist(t_ray *ray, t_player player)
 
 void	raycasting(t_info *info)
 {
-	int	x;
-	t_ray ray;
+	int		x;
+	t_ray	ray;
 
 	ft_bzero(&ray, sizeof(ray));
 	x = 0;

@@ -33,16 +33,16 @@ static void	load_texture(t_vars *vars, t_img *image, char *path)
 	width = TEX_SIZE;
 	height = TEX_SIZE;
 	init_img(image);
-    image->img = mlx_xpm_file_to_image(vars->mlx, path, &width, &height);
-    if (image->img == NULL)
-    {
-		printf("fuck off\n");
+	image->img = mlx_xpm_file_to_image(vars->mlx, path, &width, &height);
+	if (image->img == NULL)
+	{
 		exit(1);
 	}
-    image->addr = (int *)mlx_get_data_addr(image->img, &image->bites_per_pixel, &image->size_line, &image->endian);
+	image->addr = (int *)mlx_get_data_addr(image->img, &image->bites_per_pixel,
+			&image->size_line, &image->endian);
 }
 
-static int *get_img_from_xpm(t_vars *vars, char *path)
+static int	*get_img_from_xpm(t_vars *vars, char *path)
 {
 	t_img	tmp;
 	int		*buffer;
@@ -51,6 +51,10 @@ static int *get_img_from_xpm(t_vars *vars, char *path)
 
 	load_texture(vars, &tmp, path);
 	buffer = ft_calloc(1, sizeof(int) * TEX_SIZE * TEX_SIZE);
+	if (buffer == NULL)
+	{
+		exit(1);
+	}
 	y = 0;
 	while (y < TEX_SIZE)
 	{
@@ -65,16 +69,16 @@ static int *get_img_from_xpm(t_vars *vars, char *path)
 	mlx_destroy_image(vars->mlx, tmp.img);
 	return (buffer);
 }
-	
+
 void	initialize_tex_list(t_vars *vars)
 {
 	vars->info.tex_list = ft_calloc(5, sizeof(int *));
-	//manage error
-
-	vars->info.tex_list[NORTH] =  get_img_from_xpm(vars, vars->info.tex_no);
+	if (vars->info.tex_list == NULL)
+	{
+		exit(1);
+	}
+	vars->info.tex_list[NORTH] = get_img_from_xpm(vars, vars->info.tex_no);
 	vars->info.tex_list[SOUTH] = get_img_from_xpm(vars, vars->info.tex_so);
 	vars->info.tex_list[EAST] = get_img_from_xpm(vars, vars->info.tex_ea);
 	vars->info.tex_list[WEST] = get_img_from_xpm(vars, vars->info.tex_we);
 }
-
-
