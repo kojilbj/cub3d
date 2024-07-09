@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/09 14:21:19 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/09 20:57:50 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,8 @@ typedef struct s_player
 {
 	int	pos_x;
 	int	pos_y;
-	int	dir_x;
-	int	dir_y;
-	double	cam_palne_x;
-	double	cam_palne_y;
+	float	dir_x;
+	float	dir_y;
 }	t_player;
 
 typedef struct s_info
@@ -207,9 +205,10 @@ bool	is_next_to_blank(t_node **map, int x, int y);
 //-----------------------
 //			rotate_player.c
 //-----------------------
-void	rotate_player(t_player *player, int keycode);
-int		new_dir_x(t_player player, double rad);
-int		new_dir_y(t_player player, double rad);
+void	rotate_camera(t_vars *vars, int keycode);
+void	rotate_player(t_player *player, int keycode, int count);
+float	new_dir_x(t_player player, double rad);
+float	new_dir_y(t_player player, double rad);
 
 //-----------------------
 //			  move_player.c

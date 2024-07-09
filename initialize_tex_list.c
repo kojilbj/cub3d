@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 16:56:25 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/03 19:03:26 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/09 16:14:18 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	load_texture(t_vars *vars, t_img *image, char *path)
     image->img = mlx_xpm_file_to_image(vars->mlx, path, &width, &height);
     if (image->img == NULL)
     {
-		printf("fuck off\n");
+		printf("fuck off %s\n", path);
 		exit(1);
 	}
     image->addr = (int *)mlx_get_data_addr(image->img, &image->bites_per_pixel, &image->size_line, &image->endian);
