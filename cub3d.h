@@ -48,7 +48,7 @@
 //---------------------
 //				TEXTURE
 //---------------------
-#define TEX_SIZE 64
+# define TEX_SIZE 64
 # define SOUTH_WALL 0
 # define NORTH_WALL 1
 # define EAST_WALL 2 
@@ -56,10 +56,10 @@
 
 enum e_tex_list_index
 {
-    NORTH = 0,
-    SOUTH = 1,
-    EAST = 2,
-    WEST = 3
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
 };
 
 //-------------------------------//
@@ -91,7 +91,7 @@ typedef struct s_ray
 	int		line_height;
 	int		start_y;
 	int		end_y;
-} t_ray;
+}	t_ray;
 
 typedef struct s_texinfo
 {
@@ -100,7 +100,7 @@ typedef struct s_texinfo
 	double	step;
 	double	pos;
 	int		index;
-} t_texinfo;
+}	t_texinfo;
 
 typedef struct s_node
 {
@@ -112,10 +112,10 @@ typedef struct s_node
 
 typedef struct s_player
 {
-	int	pos_x;
-	int	pos_y;
-	int	dir_x;
-	int	dir_y;
+	int		pos_x;
+	int		pos_y;
+	int		dir_x;
+	int		dir_y;
 	double	cam_palne_x;
 	double	cam_palne_y;
 }	t_player;
@@ -154,28 +154,19 @@ int		init_map_info(t_info *info, char *path);
 int		perfectly_match(char *s1, char *s2);
 
 //-----------------------
-//			color_init1.c
+//			color_init*.c
 //-----------------------
 int		color_init(t_info *info, char **filedata);
 
-//-----------------------
-//			color_init2.c
-//-----------------------
 int		color_range_check(char *str);
 bool	is_valid_format(char *str);
-int	convert_str_to_rgb(char *str);
+int		convert_str_to_rgb(char *str);
 
 //-----------------------
-//			texture_init1.c
+//			texture_init*.c
 //-----------------------
 int		texture_init(t_info *info, char **filedata);
 
-
-
-
-//-----------------------
-//			texture_init2.c
-//-----------------------
 int		north_tex_init(char **tex_no, char **sp);
 int		south_tex_init(char **tex_so, char **sp);
 int		east_tex_init(char **tex_ea, char **sp);
@@ -188,19 +179,13 @@ int		player_init(t_info *info, char **filedata);
 bool	is_player(char c);
 
 //-----------------------
-//			map_init1.c
+//			map_init*.c
 //-----------------------
 int		map_init(t_info *info, char **filedata);
 
-//-----------------------
-//			map_init2.c
-//-----------------------
 bool	is_valid_map(t_node **map);
 bool	is_valid_line(char *line);
 
-//-----------------------
-//			map_init3.c
-//-----------------------
 bool	is_boader_of_map(t_node **map, int x, int y);
 bool	is_next_to_blank(t_node **map, int x, int y);
 
@@ -227,24 +212,21 @@ void	initialize_tex_list(t_vars *vars);
 //			  rendering.c
 //-----------------------
 void	rendering(t_vars *vars);
-int	render(t_vars *vars);
+int		render(t_vars *vars);
 
 //-----------------------
 //			 raycasting.c
 //-----------------------
 void	raycasting(t_info *info);
 
-//-----------------------
-//    	  dda_algorithm.c -> raycasitng.c
-//-----------------------
+//dda_algorithm.c -> raycasitng.c
+//------------------------
 void	dda_algorithm(t_ray *ray, t_info *info);
 
-//------------------------
-//		   make_tex_info.c  -> raycasitng.c
+//make_tex_info.c -> raycasitng.c
 //------------------------
 void	set_tex_info(t_ray *ray, t_texinfo *texture, t_player player);
 void	update_tex_info(t_ray *ray, t_info *info, int x);
-
 
 //-----------------------
 //			validate.c

@@ -37,6 +37,18 @@ static void	init_tex_pixels(t_info *info)
 	}
 }
 
+static void	set_pixel_color(t_vars *vars, t_img *img, int x, int y)
+{
+	if (vars->info.tex_pixels[y][x] > 0)
+		img->addr[y * (img->size_line / 4) + x]
+			= vars->info.tex_pixels[y][x];
+	else if (y < WIN_HEIGHT / 2)
+		img->addr[(y * (img->size_line / 4)) + x]
+			= vars->info.ceiling_rgb;
+	else if (y < (WIN_HEIGHT - 1))
+		img->addr[(y * (img->size_line / 4)) + x] = vars->info.floor_rgb;
+}
+
 static void	render_frame(t_vars *vars)
 {
 	int		x;
@@ -52,12 +64,7 @@ static void	render_frame(t_vars *vars)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			if (vars->info.tex_pixels[y][x] > 0)
-				img.addr[y * (img.size_line / 4) + x] = vars->info.tex_pixels[y][x];
-			else if (y < WIN_HEIGHT / 2)
-				img.addr[(y * (img.size_line / 4)) + x] = vars->info.ceiling_rgb;
-			else if (y < (WIN_HEIGHT - 1))
-				img.addr[(y * (img.size_line / 4)) + x] = vars->info.floor_rgb;
+			set_pixel_color(vars, &img, x, y);
 			x++;
 		}
 		y++;
