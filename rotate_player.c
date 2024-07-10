@@ -6,23 +6,23 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:05:19 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/09 23:42:13 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/10 13:20:17 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	new_dir_x(t_player player, double rad)
+double	new_dir_x(t_player player, double rad)
 {
-	float	new_dir_x;
+	double	new_dir_x;
 
 	new_dir_x = player.dir_x * cos(rad) - player.dir_y * sin(rad);
 	return (new_dir_x);
 }
 
-float	new_dir_y(t_player player, double rad)
+double	new_dir_y(t_player player, double rad)
 {
-	float	new_dir_y;
+	double	new_dir_y;
 
 	new_dir_y = player.dir_x * sin(rad) + player.dir_y * cos(rad);
 	return (new_dir_y);
@@ -30,8 +30,8 @@ float	new_dir_y(t_player player, double rad)
 
 void	rotate_player(t_player *player, int keycode, int count)
 {
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 
 	x = player->dir_x;
 	y = player->dir_y;
@@ -60,7 +60,7 @@ void	rotate_camera(t_vars *vars, int keycode)
 	{
 		rotate_player(&(vars->info.player), keycode, count);
 		rendering(vars);
-		// usleep(10000);
+		double_free(vars->info.tex_pixels);
 		i++;
 	}
 }
