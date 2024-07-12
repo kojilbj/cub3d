@@ -15,26 +15,35 @@
 /*
 tex->pixeis -> two-dimensional array for texture pixel
 */
-static void	init_tex_pixels(t_info *info)
+static void	free_tex_pixels(t_info *info, size_t i)
 {
-	int	i;
-
-	info->tex_pixels = ft_calloc(WIN_HEIGHT + 1, sizeof(*(info->tex_pixels)));
-	if (info->tex_pixels == NULL)
+	while (i > 0)
 	{
-		exit(1);
+		i--;
+		free(info->tex_pixels[i]);
 	}
+	free(info->tex_pixels);
+}
+
+static bool	init_tex_pixels(t_info *info)
+{
+	size_t	i;
+
+	info->tex_pixels = ft_calloc(WIN_HEIGHT + 1, sizeof(int *));
+	if (info->tex_pixels == NULL)
+		return (false);
 	i = 0;
 	while (i < WIN_HEIGHT)
 	{
-		info->tex_pixels[i] = ft_calloc(WIN_WIDTH + 1,
-				sizeof(*(info->tex_pixels)));
+		info->tex_pixels[i] = ft_calloc(WIN_WIDTH, sizeof(int));
 		if (info->tex_pixels[i] == NULL)
 		{
-			exit(1);
+			free_tex_pixels(info, i);
+			return (false);
 		}
 		i++;
 	}
+	return (true);
 }
 
 static void	set_pixel_color(t_vars *vars, t_img *img, int x, int y)
@@ -71,17 +80,16 @@ static void	render_frame(t_vars *vars)
 	}
 	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 	mlx_destroy_image(vars->mlx, img.img);
+	double_free(vars->info.tex_pixels);
 }
 
 void	rendering(t_vars *vars)
 {
-	init_tex_pixels(&(vars->info));
+	if (init_tex_pixels(&(vars->info)) == false)
+	{
+		double_free(vars->info.tex_list);
+		cleanup_on_alloc_failure(vars);
+	}
 	raycasting(&(vars->info));
 	render_frame(vars);
 }
-
-// int	render(t_vars *vars)
-// {
-// 	rendering(vars);
-// 	return (0);
-// }

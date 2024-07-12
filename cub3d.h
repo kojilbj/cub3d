@@ -249,5 +249,6 @@ void	free_info(t_info info);
 //-----------------------
 int		x_open(char *path, int oflag);
 void	double_free(int **tab);
+void	cleanup_on_alloc_failure(t_vars *vars);
 
 #endif
