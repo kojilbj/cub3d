@@ -6,31 +6,31 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/12 23:25:37 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/12 23:56:58 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	display_map(t_node **map)
-{
-	int	x;
-	int	y;
+// void	display_map(t_node **map)
+// {
+// 	int	x;
+// 	int	y;
 
-	x = 0;
-	y = 0;
-	while (map[y] != NULL)
-	{
-		x = 0;
-		while (map[y][x].type != '\0')
-		{
-			printf("%c", map[y][x].type);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-}
+// 	x = 0;
+// 	y = 0;
+// 	while (map[y] != NULL)
+// 	{
+// 		x = 0;
+// 		while (map[y][x].type != '\0')
+// 		{
+// 			printf("%c", map[y][x].type);
+// 			x++;
+// 		}
+// 		printf("\n");
+// 		y++;
+// 	}
+// }
 
 int	key_hook_handler(int keycode, t_vars *vars)
 {
@@ -59,6 +59,39 @@ int	terminate_handler(t_vars *vars)
 	return (0);
 }
 
+int	init_mlx(t_vars *vars)
+{
+	vars->mlx = mlx_init();
+	if (vars->mlx == NULL)
+	{
+		perror("mlx_init");
+		return (1);
+	}
+	vars->win = mlx_new_window(vars->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	if (vars->win == NULL)
+	{
+		perror("mlx_new_window");
+		mlx_destroy_display(vars->mlx);
+		return (1);
+	}
+	return (0);
+}
+
+int	init_vars(t_vars *vars, char *av)
+{
+	if (init_map_info(&(vars->info), av) != 0)
+	{
+		free_info(vars->info);
+		return (1);
+	}
+	if (init_mlx(vars) != 0)
+	{
+		free_info(vars->info);
+		return (1);
+	}
+	return (0);
+}
+
 int	main(int ac, char *av[])
 {
 	t_vars	vars;
@@ -73,13 +106,8 @@ int	main(int ac, char *av[])
 		put_error("invalid map-file name.\n");
 		return (1);
 	}
-	if (init_map_info(&(vars.info), av[1]) != 0)
-	{
-		free_info(vars.info);
+	if (init_vars(&vars, av[1]) != 0)
 		return (1);
-	}
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	initialize_tex_list(&vars);
 	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
