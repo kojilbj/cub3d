@@ -42,6 +42,7 @@ int	key_hook_handler(int keycode, t_vars *vars)
 		//free(vars->mlx);
 		//free(vars->win);
 		free_info(vars->info);
+		double_free(vars->info.tex_list);
 		// sleep(10);//to monitor momory-leaks
 		exit(EXIT_SUCCESS);
 	}
@@ -50,7 +51,6 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	move_player(vars, keycode);
 	display_map(vars->info.map);
 	rendering(vars);
-	double_free(vars->info.tex_pixels);
 	return (0);
 }
 
@@ -59,6 +59,7 @@ int	terminate_handler(t_vars *vars)
 	mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free_info(vars->info);
+	double_free(vars->info.tex_list);
 	// sleep(10);//to monitor momory-leaks
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -88,7 +89,7 @@ int	main(int ac, char *av[])
 	vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	initialize_tex_list(&vars);
 	rendering(&vars);
-	double_free(vars.info.tex_pixels);
+	// double_free(vars.info.tex_pixels);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
 	mlx_hook(vars.win, 17, 1 << 17, terminate_handler, &vars);
 	// mlx_loop_hook(vars.mlx, render, &(vars));

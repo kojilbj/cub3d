@@ -37,3 +37,11 @@ void	double_free(int **tab)
 	}
 	free(tab);
 }
+
+void	cleanup_on_alloc_failure(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free_info(vars->info);
+	exit(EXIT_FAILURE);
+}
