@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:58:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:33:27 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/12 23:19:59 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	color_range_check(char *str)
 
 int	convert_str_to_rgb(char *str)
 {
-	int		rgb;
 	int		i;
+	int	rgb;
 	char	**sp;
 
 	rgb = 0;

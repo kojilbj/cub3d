@@ -73,8 +73,8 @@ $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -I $(HEAD) -c $< -o $@
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)

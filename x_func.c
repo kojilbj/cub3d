@@ -24,3 +24,24 @@ int	x_open(char *path, int oflag)
 	}
 	return (fd);
 }
+
+void	double_free(int **tab)
+{
+	size_t	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void	cleanup_on_alloc_failure(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free_info(vars->info);
+	exit(EXIT_FAILURE);
+}
