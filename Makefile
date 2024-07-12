@@ -1,5 +1,5 @@
 CC = cc
-# CC += -g -fsanitize=address
+CC += -g -fsanitize=address
 CFLAGS = -Wextra -Wall -Werror 
 SRCS = main.c init_map_info.c \
 	rotate_player.c move_player.c \

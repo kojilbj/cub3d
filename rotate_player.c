@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:05:19 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/10 21:02:15 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/12 23:24:35 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	rotate_camera(t_vars *vars, int keycode)
 	{
 		rotate_player(&(vars->info.player), keycode, count);
 		rendering(vars);
-		double_free(vars->info.tex_pixels);
 		i++;
 	}
 }
