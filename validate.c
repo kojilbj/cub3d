@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:05 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 12:10:05 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:32:57 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	file_name_validate(char *arg)
 	if (ft_strlen(arg) < 5)
 		return (1);
 	ptr = ft_strrchr(arg, '.');
-	if (ft_strncmp(ptr, ".cub\0", 5))
+	if (ptr != NULL && ft_strncmp(ptr, ".cub\0", 5))
 		return (1);
 	return (0);
 }

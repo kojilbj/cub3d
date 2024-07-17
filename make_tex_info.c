@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_tex_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 00:26:12 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/05 09:33:44 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 18:33:53 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static int	decide_dir_tex(t_ray *ray, t_player player)
 	if (ray->axis == Y_AXIS)
 	{
 		if (ray->map_y < player.pos_y)
-			wall_tex = WEST_WALL;
+			wall_tex = SOUTH_WALL;
 		else
-			wall_tex = EAST_WALL;
+			wall_tex = NORTH_WALL;
 	}
 	else if (ray->map_x < player.pos_x)
-		wall_tex = SOUTH_WALL;
+		wall_tex = WEST_WALL;
 	else
-		wall_tex = NORTH_WALL;
+		wall_tex = EAST_WALL;
 	return (wall_tex);
 }
 

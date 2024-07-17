@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
+/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/17 16:14:23 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:32:26 by hosonu           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@
 //				TEXTURE
 //---------------------
 # define TEX_SIZE 64
-# define SOUTH_WALL 0
-# define NORTH_WALL 1
+# define NORTH_WALL 0
+# define SOUTH_WALL 1
 # define EAST_WALL 2 
 # define WEST_WALL 3
 
