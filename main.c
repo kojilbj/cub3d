@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/17 15:50:54 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:14:44 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	if (keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
 		rotate_camera(vars, keycode);
 	move_player(vars, keycode);
-	rendering(vars);
 	return (0);
 }
 
@@ -109,6 +108,7 @@ int	main(int ac, char *av[])
 	initialize_tex_list(&vars);
 	rendering(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_hook_handler, &vars);
+	mlx_hook(vars.win, 9, 1 << 21, rendering, &vars);
 	mlx_hook(vars.win, 17, 1 << 17, terminate_handler, &vars);
 	mlx_loop(vars.mlx);
 }

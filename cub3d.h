@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/17 15:19:20 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:14:23 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,8 +210,7 @@ void	initialize_tex_list(t_vars *vars);
 //-----------------------
 //			  rendering.c
 //-----------------------
-void	rendering(t_vars *vars);
-int		render(t_vars *vars);
+int		rendering(t_vars *vars);
 
 //-----------------------
 //			 raycasting.c

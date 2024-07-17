@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:09:54 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/17 15:48:45 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:12:40 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static bool	render_frame(t_vars *vars)
 	return (true);
 }
 
-void	rendering(t_vars *vars)
+int	rendering(t_vars *vars)
 {
 	if (init_tex_pixels(&(vars->info)) == false)
 	{
@@ -101,4 +101,5 @@ void	rendering(t_vars *vars)
 		double_free(vars->info.tex_list);
 		cleanup_on_alloc_failure(vars);
 	}
+	return (1);
 }

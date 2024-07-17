@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/19 15:49:56 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/17 15:18:48 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:05:42 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_ray_info(int x, t_ray *ray, t_player player)
 	ray->map_y = player.pos_y;
 	if (fabs(ray->dir_x) < 1e-6)
 		ray->delta_dist_x = 1e6;
+	else
 		ray->delta_dist_x = fabs(1 / ray->dir_x);
 	if (fabs(ray->dir_y) < 1e-6)
 		ray->delta_dist_y = 1e6;
