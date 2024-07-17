@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:09:54 by hosonu            #+#    #+#             */
-/*   Updated: 2024/07/09 14:11:31 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 15:48:45 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 /*
 tex->pixeis -> two-dimensional array for texture pixel
 */
-static void	free_tex_pixels(t_info *info, size_t i)
-{
-	while (i > 0)
-	{
-		i--;
-		free(info->tex_pixels[i]);
-	}
-	free(info->tex_pixels);
-}
 
 static bool	init_tex_pixels(t_info *info)
 {
@@ -58,29 +49,43 @@ static void	set_pixel_color(t_vars *vars, t_img *img, int x, int y)
 		img->addr[(y * (img->size_line / 4)) + x] = vars->info.floor_rgb;
 }
 
-static void	render_frame(t_vars *vars)
+static void	render_frame_utils(t_vars *vars, t_img *img)
 {
-	int		x;
-	int		y;
-	t_img	img;
+	int	x;
+	int	y;
 
-	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
-	img.addr = (int *)mlx_get_data_addr(img.img, &img.bites_per_pixel,
-			&img.size_line, &img.endian);
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			set_pixel_color(vars, &img, x, y);
+			set_pixel_color(vars, img, x, y);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, img->img, 0, 0);
+}
+
+static bool	render_frame(t_vars *vars)
+{
+	t_img	img;
+
+	img.img = mlx_new_image(vars->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (img.img == NULL)
+		return (false);
+	img.addr = (int *)mlx_get_data_addr(img.img, &img.bites_per_pixel,
+			&img.size_line, &img.endian);
+	if (img.addr == NULL)
+	{
+		mlx_destroy_image(vars->mlx, img.img);
+		return (false);
+	}
+	render_frame_utils(vars, &img);
 	mlx_destroy_image(vars->mlx, img.img);
 	double_free(vars->info.tex_pixels);
+	return (true);
 }
 
 void	rendering(t_vars *vars)
@@ -91,5 +96,9 @@ void	rendering(t_vars *vars)
 		cleanup_on_alloc_failure(vars);
 	}
 	raycasting(&(vars->info));
-	render_frame(vars);
+	if (render_frame(vars) == false)
+	{
+		double_free(vars->info.tex_list);
+		cleanup_on_alloc_failure(vars);
+	}
 }

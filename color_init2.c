@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:58:07 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/12 23:21:38 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 15:39:31 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ int	color_range_check(char *str)
 			ret = 1;
 		i++;
 	}
+	free_all((void **)sp);
+	free(sp);
 	if (i != 3)
 	{
 		put_error("Invalid color format.\n");
 		return (1);
 	}
-	free_all((void **)sp);
-	free(sp);
 	return (ret);
 }
 

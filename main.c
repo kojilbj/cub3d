@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/12 23:56:58 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 15:50:54 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 // 		printf("\n");
 // 		y++;
 // 	}
-// }
-
 int	key_hook_handler(int keycode, t_vars *vars)
 {
 	if (keycode == ESC)

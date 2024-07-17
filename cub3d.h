@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/12 23:20:11 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 15:19:20 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ void	free_info(t_info info);
 //-----------------------
 int		x_open(char *path, int oflag);
 void	double_free(int **tab);
+void	free_tex_pixels(t_info *info, size_t i);
 void	cleanup_on_alloc_failure(t_vars *vars);
 
 #endif

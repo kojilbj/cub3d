@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:53 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 17:32:39 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 15:33:44 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int	init_map_info(t_info *info, char *path)
 {
 	char	*filedata;
 	char	**splited;
+	int		ret;
 
+	ret = 0;
 	ft_bzero(info, sizeof(t_info));
 	info->ceiling_rgb = -1;
 	info->floor_rgb = -1;
@@ -41,14 +43,14 @@ int	init_map_info(t_info *info, char *path)
 	splited = ft_split(filedata, '\n');
 	free(filedata);
 	if (texture_init(info, splited) != 0)
-		return (1);
-	if (color_init(info, splited) != 0)
-		return (2);
-	if (player_init(info, splited) != 0)
-		return (3);
-	if (map_init(info, splited) != 0)
-		return (4);
+		ret = 1;
+	if (ret == 0 && color_init(info, splited) != 0)
+		ret = 2;
+	if (ret == 0 && player_init(info, splited) != 0)
+		ret = 3;
+	if (ret == 0 && map_init(info, splited) != 0)
+		ret = 4;
 	free_all((void **)splited);
 	free(splited);
-	return (0);
+	return (ret);
 }

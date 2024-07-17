@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:49 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 12:25:42 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 15:36:58 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	texture_init_check(t_info info)
 	ret += info.tex_ea == NULL;
 	ret += info.tex_we == NULL;
 	if (ret != 0)
-		put_error("Texture info is not enough");
+		put_error("Texture info is not enough\n");
 	return (ret);
 }
 
