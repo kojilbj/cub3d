@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:31 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 11:07:33 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 18:58:37 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ static bool	is_valid_location(t_node **map, int x, int y)
 		return (false);
 	}
 	if (is_next_to_blank(map, x, y) == true)
+	{
+		put_error("Invalid map.\n");
+		return (false);
+	}
+	if (exist_updown(map, x, y) == false)
 	{
 		put_error("Invalid map.\n");
 		return (false);

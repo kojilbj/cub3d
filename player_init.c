@@ -6,7 +6,7 @@
 /*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:28 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 22:25:33 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/17 19:02:08 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ int	player_init(t_info *info, char **filedata)
 		y++;
 	}
 	if (ret != 0 || player_init_check(info->player))
-		put_error("player.");
+		put_error("player not exist.\n");
 	return (ret || player_init_check(info->player));
 }

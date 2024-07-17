@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hosonu <hosonu@student.42.fr>              +#+  +:+       +#+        */
+/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:48:56 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/17 18:32:26 by hosonu           ###   ########.fr       */
+/*   Updated: 2024/07/17 19:00:42 by watanabekoj      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ bool	is_valid_line(char *line);
 
 bool	is_boader_of_map(t_node **map, int x, int y);
 bool	is_next_to_blank(t_node **map, int x, int y);
+bool	exist_updown(t_node **map, int x, int y);
 
 //-----------------------
 //			rotate_player.c
