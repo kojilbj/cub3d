@@ -6,7 +6,7 @@
 /*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:06:17 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/17 16:14:44 by kojwatan         ###   ########.fr       */
+/*   Updated: 2024/07/17 16:19:00 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	key_hook_handler(int keycode, t_vars *vars)
 	if (keycode == ROTATE_LEFT || keycode == ROTATE_RIGHT)
 		rotate_camera(vars, keycode);
 	move_player(vars, keycode);
+	rendering(vars);
 	return (0);
 }
 
