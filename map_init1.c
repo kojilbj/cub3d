@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_init1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: watanabekoji <watanabekoji@student.42.f    +#+  +:+       +#+        */
+/*   By: kojwatan < kojwatan@student.42tokyo.jp>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 22:49:31 by kojwatan          #+#    #+#             */
-/*   Updated: 2024/07/03 10:49:58 by watanabekoj      ###   ########.fr       */
+/*   Updated: 2024/07/24 17:16:44 by kojwatan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static t_node	**map_alloc(char **filedata)
 		if (map[i] == NULL)
 		{
 			free_all((void **)map);
+			free(map);
 			return (NULL);
 		}
 		i++;
